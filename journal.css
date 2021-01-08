@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "Emblema One";
-	src: url(PettingillCF-Bold.otf); 
+	src: url("PettingillCF-Bold.otf"); 
 }
 body {
   font-family:     Verdana, Geneva, Arial, sans-serif;
