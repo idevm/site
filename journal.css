@@ -1,7 +1,6 @@
 @font-face {
 	font-family: "Emblema One";
-	src: url("EmblemaOne-Regular.woff") format("woff"), 
-	     url("http://wickedlysmart.com/hfhtmlcss/chapter8/journal/EmblemaOne-Regular.ttf"); 
+	src: url("PettingillCF-Bold.otf") format("otf"); 
 }
 body {
   font-family:     Verdana, Geneva, Arial, sans-serif;
