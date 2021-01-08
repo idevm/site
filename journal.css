@@ -12,7 +12,7 @@ h1, h2 {
   border-bottom:   thin dotted #888888;
 }
 h1 {
-  font-family:     "Emblema One", sans-serif;
+  font-family:     "Emblema One", Courier, sans-serif;
   font-size:       220%;
 }
 h2 {
