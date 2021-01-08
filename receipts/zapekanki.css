@@ -1,0 +1,38 @@
+body {
+	background-color: #FFC72C;
+	color: black;
+	font-size: large;
+	font-family: Arial, sans-serif;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+h1 {
+	color: #DA291C;
+	font-size: 250%;
+	border-bottom: 1px dotted;
+	font-weight: bold;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+}
+h2 {
+	color: white;
+	font-size: 170%;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	padding-top: 50px;
+}
+.ingredients, .cooking {
+	font-style: italic;
+	font-weight: bold;
+}
+.ingredients {
+	color: #008f00;
+}
+.cooking {
+	color: #8B4513;
+}
+div {
+	text-align: center;
+}
+a {
+	color: #DA291C;
+}
