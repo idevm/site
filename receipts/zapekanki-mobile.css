@@ -1,0 +1,71 @@
+body {
+	background-color: #FFC72C;
+	color: black;
+	font-size: large;
+	font-family: Arial, sans-serif;
+	margin-left: 0%;
+	margin-right: 0%;
+}
+h1 {
+	color: #DA291C;
+	font-size: 250%;
+	border-bottom: 1px dashed;
+	font-weight: bold;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+}
+h2 {
+	color: white;
+	font-size: 190%;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	padding-top: 50px;
+}
+.ingredients, .cooking {
+	font-style: italic;
+	font-weight: bold;
+}
+.ingredients {
+	color: #008f00;
+}
+.cooking {
+	color: #8B4513;
+}
+div {
+	text-align: center;
+}
+a {
+	color: #DA291C;
+	font-weight: bold;
+}
+#menu {
+	line-height: 200%;
+	border-width: 10px;
+	border-style: solid;
+	border-top-right-radius: 0px;
+	border-top-left-radius: 50px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-color: #DA291C;
+	border-bottom-color: #FFC72C;
+	border-bottom-style: dashed;
+	background-color: white;
+	padding: 30px;
+	padding-top: 10px;
+	margin-left: 5%;
+	margin-right: 5%;
+	background-image: url(cocktail.gif);
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+ol {
+	line-height: 1.5em;
+}
+#footer {
+	font-size: small;
+	font-style: italic;
+	background-color: #8B4513;
+	color: white;
+	margin-right: 0px;
+	margin-left: 0px;
+	padding: 10px;
+}
