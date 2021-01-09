@@ -33,7 +33,19 @@ h2 {
 div {
 	text-align: center;
 }
-a {
+a:link {
+	color: #DA291C;
+	font-weight: bold;
+}
+a:visited {
+	color: #8B4513;
+	font-weight: bold;
+}
+a:hover {
+	color: #008f00;
+	font-weight: bold;
+}
+#toTop a {
 	color: #DA291C;
 	font-weight: bold;
 }
@@ -50,7 +62,7 @@ a {
 	border-bottom-style: dashed;
 	background-color: white;
 	padding: 30px;
-	padding-top: 10px;
+	padding-top: 30px;
 	margin-left: 5%;
 	margin-right: 5%;
 	background-image: url(cocktail.gif);
@@ -61,11 +73,21 @@ ol {
 	line-height: 1.5em;
 }
 #footer {
-	font-size: small;
+	font-size: 50%;
 	font-style: italic;
 	background-color: #8B4513;
 	color: white;
-	margin-right: 0px;
-	margin-left: 0px;
+	margin-top: 30px;
 	padding: 10px;
+}
+#header {
+	padding: 30px;
+	background-color: #008f00;
+	background-image: url(star.gif);
+	background-position: left;
+	background-repeat: no-repeat;
+}
+#header a {
+	color: white;
+	text-decoration-line: none;
 }
