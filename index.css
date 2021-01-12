@@ -1,12 +1,52 @@
 body {
-	background-color: #add4e6;
-	color: black;
+	background-color: #368d80;
+	color: #f1c27f;
 	font-family: sans-serif;
 	font-size: large;
-	text-align: center;
+	margin: 0px;
 	}
 h1 {
 	font-size: 200%;
-	color: #8db750;
-	padding-bottom: 50px;
+	color: #dcb98b;
+	text-align: center;
+	height: 150px;
+	padding: 0px;
+	margin: 0px;
 	}
+#logo {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}	
+nav {
+	background-color: #81a888;
+	text-align: center;
+	padding: 3px;
+}	
+nav ul {
+	list-style-type: none;
+}
+nav li {
+	display: inline;
+	padding: 15px 15px 15px 0px;
+	vertical-align: middle;
+}
+nav ul li a:link, nav ul li a:visited {
+	text-decoration: none;
+	border-bottom: none;
+	color: black;
+	font-size: 125%;
+}
+nav ul li a:hover {
+	font-weight: bold;
+}
+#video {
+	background-color: black;
+	text-align: right;
+}
+footer {
+	background-color: black;
+	color: white;
+	text-align: center;
+	font-size: 75%;
+}
