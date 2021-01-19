@@ -105,6 +105,7 @@ var controller = {
 					+ this.guesses + ' выстрелов');
 				var end = document.getElementById('guessInput');
 				end.removeAttribute('id');
+				document.getElementById('table').remove();
 			}
 		}
 	}
