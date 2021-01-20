@@ -3,6 +3,10 @@ var view = {
 		var messageArea = document.getElementById('messageArea');
 		messageArea.innerHTML = msg;
 	},
+	displayStat: function (msg){
+		var statArea = document.getElementById('stat');
+		statArea.innerHTML = msg;		
+	},
 	displayHit: function (location){
 		var cell = document.getElementById(location);
 		cell.setAttribute('class', 'hit');
@@ -35,6 +39,8 @@ var model = {
 				if (this.isSunk(ship)){
 					view.displayMessage('УБИЛ!');
 					this.shipsSunk++;
+					view.displayStat('Осталось кораблей: ' + (model.numShips - model.shipsSunk) + '. '
+						+ 'Тип кораблей: ' + model.shipLength + '-х палубные.');
 				}
 				return true;
 			}
@@ -134,60 +140,28 @@ function parseGuess(guess){
 };
 
 function init (){
+	confirm('В этой игре Вам предстоит стрелять по кораблям противника, спрятанным на игровом поле. Собственных кораблей у Вас нет. В бой!');
 	var fireButton = document.getElementById('fireButton');
 	fireButton.onclick = handleFireButton;
 	var guessInput = document.getElementById('guessInput');
 	guessInput.onkeypress = handleKeyPress;
+	var reloading = document.getElementById('reload');
+	reloading.addEventListener('click', function (e){window.location.reload()});
 	model.generateSipLocations();
-	document.getElementById("00").addEventListener('click', function (e){var guess = 'a0'; controller.processGuess(guess)});
-	document.getElementById("01").addEventListener('click', function (e){var guess = 'a1'; controller.processGuess(guess)});
-	document.getElementById("02").addEventListener('click', function (e){var guess = 'a2'; controller.processGuess(guess)});
-	document.getElementById("03").addEventListener('click', function (e){var guess = 'a3'; controller.processGuess(guess)});
-	document.getElementById("04").addEventListener('click', function (e){var guess = 'a4'; controller.processGuess(guess)});
-	document.getElementById("05").addEventListener('click', function (e){var guess = 'a5'; controller.processGuess(guess)});
-	document.getElementById("06").addEventListener('click', function (e){var guess = 'a6'; controller.processGuess(guess)});
-	document.getElementById("10").addEventListener('click', function (e){var guess = 'b0'; controller.processGuess(guess)});
-	document.getElementById("11").addEventListener('click', function (e){var guess = 'b1'; controller.processGuess(guess)});
-	document.getElementById("12").addEventListener('click', function (e){var guess = 'b2'; controller.processGuess(guess)});
-	document.getElementById("13").addEventListener('click', function (e){var guess = 'b3'; controller.processGuess(guess)});
-	document.getElementById("14").addEventListener('click', function (e){var guess = 'b4'; controller.processGuess(guess)});
-	document.getElementById("15").addEventListener('click', function (e){var guess = 'b5'; controller.processGuess(guess)});
-	document.getElementById("16").addEventListener('click', function (e){var guess = 'b6'; controller.processGuess(guess)});
-	document.getElementById("20").addEventListener('click', function (e){var guess = 'c0'; controller.processGuess(guess)});
-	document.getElementById("21").addEventListener('click', function (e){var guess = 'c1'; controller.processGuess(guess)});
-	document.getElementById("22").addEventListener('click', function (e){var guess = 'c2'; controller.processGuess(guess)});
-	document.getElementById("23").addEventListener('click', function (e){var guess = 'c3'; controller.processGuess(guess)});
-	document.getElementById("24").addEventListener('click', function (e){var guess = 'c4'; controller.processGuess(guess)});
-	document.getElementById("25").addEventListener('click', function (e){var guess = 'c5'; controller.processGuess(guess)});
-	document.getElementById("26").addEventListener('click', function (e){var guess = 'c6'; controller.processGuess(guess)});
-	document.getElementById("30").addEventListener('click', function (e){var guess = 'd0'; controller.processGuess(guess)});
-	document.getElementById("31").addEventListener('click', function (e){var guess = 'd1'; controller.processGuess(guess)});
-	document.getElementById("32").addEventListener('click', function (e){var guess = 'd2'; controller.processGuess(guess)});
-	document.getElementById("33").addEventListener('click', function (e){var guess = 'd3'; controller.processGuess(guess)});
-	document.getElementById("34").addEventListener('click', function (e){var guess = 'd4'; controller.processGuess(guess)});
-	document.getElementById("35").addEventListener('click', function (e){var guess = 'd5'; controller.processGuess(guess)});
-	document.getElementById("36").addEventListener('click', function (e){var guess = 'd6'; controller.processGuess(guess)});
-	document.getElementById("40").addEventListener('click', function (e){var guess = 'e0'; controller.processGuess(guess)});
-	document.getElementById("41").addEventListener('click', function (e){var guess = 'e1'; controller.processGuess(guess)});
-	document.getElementById("42").addEventListener('click', function (e){var guess = 'e2'; controller.processGuess(guess)});
-	document.getElementById("43").addEventListener('click', function (e){var guess = 'e3'; controller.processGuess(guess)});
-	document.getElementById("44").addEventListener('click', function (e){var guess = 'e4'; controller.processGuess(guess)});
-	document.getElementById("45").addEventListener('click', function (e){var guess = 'e5'; controller.processGuess(guess)});
-	document.getElementById("46").addEventListener('click', function (e){var guess = 'e6'; controller.processGuess(guess)});
-	document.getElementById("50").addEventListener('click', function (e){var guess = 'f0'; controller.processGuess(guess)});
-	document.getElementById("51").addEventListener('click', function (e){var guess = 'f1'; controller.processGuess(guess)});
-	document.getElementById("52").addEventListener('click', function (e){var guess = 'f2'; controller.processGuess(guess)});
-	document.getElementById("53").addEventListener('click', function (e){var guess = 'f3'; controller.processGuess(guess)});
-	document.getElementById("54").addEventListener('click', function (e){var guess = 'f4'; controller.processGuess(guess)});
-	document.getElementById("55").addEventListener('click', function (e){var guess = 'f5'; controller.processGuess(guess)});
-	document.getElementById("56").addEventListener('click', function (e){var guess = 'f6'; controller.processGuess(guess)});
-	document.getElementById("60").addEventListener('click', function (e){var guess = 'g0'; controller.processGuess(guess)});
-	document.getElementById("61").addEventListener('click', function (e){var guess = 'g1'; controller.processGuess(guess)});
-	document.getElementById("62").addEventListener('click', function (e){var guess = 'g2'; controller.processGuess(guess)});
-	document.getElementById("63").addEventListener('click', function (e){var guess = 'g3'; controller.processGuess(guess)});
-	document.getElementById("64").addEventListener('click', function (e){var guess = 'g4'; controller.processGuess(guess)});
-	document.getElementById("65").addEventListener('click', function (e){var guess = 'g5'; controller.processGuess(guess)});
-	document.getElementById("66").addEventListener('click', function (e){var guess = 'g6'; controller.processGuess(guess)});
+	view.displayStat('Осталось кораблей: ' + (model.numShips - model.shipsSunk) + '. '
+		+ 'Тип кораблей: ' + model.shipLength + '-х палубные.');
+	for (var i = 0; i < model.boardSize; i++){
+		var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+		var dig1 = i.toString();
+		var char1 = alphabet[i];
+		for (var j = 0; j < model.boardSize; j++){
+			var dig2 = j.toString();
+			var idBoard = dig1 + dig2;
+			const guessBoard = char1 + dig2;
+			document.getElementById(idBoard).addEventListener('click', function (e){
+				controller.processGuess(guessBoard)});
+		}
+	};
 };
 
 function handleFireButton (){
