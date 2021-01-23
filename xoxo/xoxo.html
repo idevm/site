@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Крестики-нолики</title>
+	<style type="text/css">
+		body {
+			background-color: white;
+		}
+		div#board {
+			position: relative;
+			width: 604px;
+			height: 604px;
+			margin: auto;
+			background: url("board.png") no-repeat;
+		}
+		div#messageArea {
+			position: relative;
+			margin: auto;
+			color: blue;
+			text-align: center;
+			font-size: 20px;
+			font-family: Arial;
+		}
+		table {
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			border-spacing: 0px;
+		}
+		td {
+			width: 200px;
+			height: 200px;
+		}
+		.x {
+			background: url(x.png) no-repeat center center;
+		}
+		.o {
+			background: url(o.png) no-repeat center center;
+		}
+	</style>
+</head>
+<body>
+	<div id="messageArea">Ваш ход!</div>
+	<div id="board">
+		<table id="table">
+			<tr>
+				<td id="00"></td>
+				<td id="01"></td>
+				<td id="02"></td>
+			</tr>
+			<tr>
+				<td id="10"></td>
+				<td id="11"></td>
+				<td id="12"></td>
+			</tr>
+			<tr>
+				<td id="20"></td>
+				<td id="21"></td>
+				<td id="22"></td>
+			</tr>
+		</table>
+	<script src="xoxo.js"></script>	
+</body>
+</html>
