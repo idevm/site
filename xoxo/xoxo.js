@@ -1,18 +1,15 @@
 var view = { //визуальное представление
 	
 	displayMessage: function (msg){ //вывод сообщений
-		var messageArea = document.getElementById('messageArea');
-		messageArea.innerHTML = msg;
+		document.getElementById('messageArea').innerHTML = msg;
 	},
 	
 	displayX: function (location){ //вывод ходов Х
-		var cell = document.getElementById(location);
-		cell.setAttribute('class', 'x');
+		document.getElementById(location).setAttribute('class', 'x');
 	},
 	
 	displayO: function (location){ // вывод ходов О
-		var cell = document.getElementById(location);
-		cell.setAttribute('class', 'o');
+		document.getElementById(location).setAttribute('class', 'o');
 	}
 };
 
@@ -21,49 +18,65 @@ var model = { //модель игры
 	
 	boardSize: 3, //размер игрового поля
 	
+	gameOver: false,
+
+	moves: 0,
+
 	playerTurn: function(location){ //ход игрока
 		hit(location, 'x');
 		this.closedCells.push(location);
 		view.displayX(location);
-		for (var i = 0; i < this.boardSize * 2 + 2; i++){
+		this.moves++;
+		for (var i = 0; i < (this.boardSize * 2 + 2); i++){//проверка на комбинацию из трех Х
 			var winLine = this.cells[i];
 			if (winLine.hits.every(function (hit){return hit === 'x'})){
 				view.displayMessage('Вы выиграли!');
-				for (var i = 0; i < model.boardSize * 2 + 2; i++){
-					var winLine = model.cells[i];
+				this.gameOver = true;
+				setTimeout(newGame, 500);
 					for (var j = 0; j < winLine.hits.length; j++){
 						if (winLine.hits[j] === ''){
 							var cellId = winLine.locations[j];
 							this.closedCells.push(cellId);
 						}
 					}
-				}
 			} 
 		}
-		controller.AIMove();
+		this.nextMove(controller.AIMove);
 	},
 	
 	AITurn: function(location){ //ход противника, компьютера
 		hit(location, 'o');
 		this.closedCells.push(location);
 		view.displayO(location);
-		for (var i = 0; i < this.boardSize * 2 + 2; i++){
+		this.moves++;
+		for (var i = 0; i < (this.boardSize * 2 + 2); i++){//проверка на комбинацию из трех О
 			var winLine = this.cells[i];
 			if (winLine.hits.every(function (hit){return hit === 'o'})){
 				view.displayMessage('Вы проиграли!');
-				for (var i = 0; i < model.boardSize * 2 + 2; i++){
-					var winLine = model.cells[i];
+				this.gameOver = true;
+				setTimeout(newGame, 500);
 					for (var j = 0; j < winLine.hits.length; j++){
 						if (winLine.hits[j] === ''){
 							var cellId = winLine.locations[j];
 							this.closedCells.push(cellId);
 						}
 					}
-				}
 			} 
-		}	
+		}
+		this.nextMove(controller.playerMove);
 	},
 	
+	nextMove: function (nextPlayer) { //передача хода
+ 		if (!this.gameOver && this.moves < (this.boardSize * this.boardSize)){
+			nextPlayer();
+		} else if (!this.gameOver && this.moves == (this.boardSize * this.boardSize)) {
+			view.displayMessage('Ничья!');
+			setTimeout(newGame, 500);			
+		} else {
+			return false;
+		}
+	},
+
 	closedCells: [], //массив ячеек, в которых сделаны ходы
 	
 	cells: [ //строки, столбцы и диагонали, в которых производятся действия
@@ -82,20 +95,24 @@ var model = { //модель игры
 var controller = { //контроллер
 	
 	playerMove: function(location){ //прием хода игрока
-		parseMove(location);
+		if (location) {
+			parseMove(location);
+		}	
 	},
 	
 	AIMove: function(){ //прием хода компьютера
-		var row = Math.floor(Math.random() * model.boardSize);
-		var col = Math.floor(Math.random() * model.boardSize);
+		var row;
+		var col;
+		row = Math.floor(Math.random() * model.boardSize);
+		col = Math.floor(Math.random() * model.boardSize);
 		var location = row + '' + col;
-		parseMoveAI(location);
+		parseAIMove(location);
 		}
 };
 
 
 function parseMove(location){ //валидатор хода игрока
-	if (model.closedCells.indexOf(location) < 0){
+	if ((model.closedCells.indexOf(location) < 0) && (!model.gameOver)){
 		model.playerTurn(location);
 	} else {
 		return false;
@@ -103,8 +120,8 @@ function parseMove(location){ //валидатор хода игрока
 }
 
 
-function parseMoveAI(location){ //валидатор хода компьютера
-	if (model.closedCells.indexOf(location) < 0){
+function parseAIMove(location){ //валидатор хода компьютера
+	if ((model.closedCells.indexOf(location) < 0) && (!model.gameOver)){
 		model.AITurn(location);
 	} else {
 		controller.AIMove();
@@ -128,12 +145,17 @@ function init(){ //инициализация игры
 
 
 function hit(location, sym){ //функция записи хода конкретного игрока в соответствующую ячейку
-	for (var i = 0; i < model.boardSize * 2 + 2; i++){
+	for (var i = 0; i < (model.boardSize * 2 + 2); i++){
 		var winLine = model.cells[i];
 		var index = winLine.locations.indexOf(location);
-			if (index >= 0){
-				winLine.hits[index] = sym;
-			}
+		winLine.hits[index] = sym;
+	}
+}
+
+
+function newGame(){
+	if (confirm('Сыграем еще раз?')){
+		window.location.reload();
 	}
 }
 
