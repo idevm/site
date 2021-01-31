@@ -77,17 +77,17 @@ var model = { //модель игры
 		}
 	},
 
-	closedCells: [], //массив ячеек, в которых сделаны ходы
+	closedCells: [], //массив ячеек, в которых сделаны ходы: нужен для предотвращения повторного хода
 	
 	cells: [ //строки, столбцы и диагонали, в которых производятся действия
-		{locations: ['00', '01', '02'], hits: ['', '', '',]},
-		{locations: ['10', '11', '12'], hits: ['', '', '',]},
-		{locations: ['20', '21', '22'], hits: ['', '', '',]},
-		{locations: ['00', '10', '20'], hits: ['', '', '',]},
-		{locations: ['01', '11', '21'], hits: ['', '', '',]},
-		{locations: ['02', '12', '22'], hits: ['', '', '',]},
-		{locations: ['00', '11', '22'], hits: ['', '', '',]},
-		{locations: ['02', '11', '20'], hits: ['', '', '',]},
+		{locations: ['00', '01', '02'], hits: ['', '', '',], toWinX: 0},
+		{locations: ['10', '11', '12'], hits: ['', '', '',], toWinX: 0},
+		{locations: ['20', '21', '22'], hits: ['', '', '',], toWinX: 0},
+		{locations: ['00', '10', '20'], hits: ['', '', '',], toWinX: 0},
+		{locations: ['01', '11', '21'], hits: ['', '', '',], toWinX: 0},
+		{locations: ['02', '12', '22'], hits: ['', '', '',], toWinX: 0},
+		{locations: ['00', '11', '22'], hits: ['', '', '',], toWinX: 0},
+		{locations: ['02', '11', '20'], hits: ['', '', '',], toWinX: 0},
 		]
 };
 
@@ -103,11 +103,38 @@ var controller = { //контроллер
 	AIMove: function(){ //прием хода компьютера
 		var row;
 		var col;
-		row = Math.floor(Math.random() * model.boardSize);
-		col = Math.floor(Math.random() * model.boardSize);
-		var location = row + '' + col;
-		parseAIMove(location);
-		}
+		var location;
+		if (model.moves <= 1){ // для первого хода генерируется случайная позиция
+			row = Math.floor(Math.random() * model.boardSize);
+			col = Math.floor(Math.random() * model.boardSize);
+			location = row + '' + col;
+			parseAIMove(location);
+		} else { //определение позиции в соответствии с приоритетом
+			var winLineToWinO = model.cells.find(item => item.toWinX == 0 - (model.boardSize - 1));
+			var winLineToWinX = model.cells.find(item => item.toWinX == 0 + (model.boardSize - 1));
+			var winLineCloseToWinO = model.cells.find(item => item.toWinX == 0 - (model.boardSize - 2) && item.hits.includes(''));
+			var winLineCloseToWinX = model.cells.find(item => item.toWinX == 0 + (model.boardSize - 2) && item.hits.includes(''));			
+			if (winLineToWinO){
+	 			index = winLineToWinO.hits.indexOf('');
+				location = winLineToWinO.locations[index];
+				parseAIMove(location);
+			} else if (winLineToWinX){
+	 			index = winLineToWinX.hits.indexOf('');
+				location = winLineToWinX.locations[index];
+				parseAIMove(location);				
+			} else if (winLineCloseToWinO){
+	 			index = winLineCloseToWinO.hits.indexOf('');
+				location = winLineCloseToWinO.locations[index];
+				parseAIMove(location);				
+			} else if (winLineCloseToWinX){
+	 			index = winLineCloseToWinX.hits.indexOf('');
+				location = winLineCloseToWinX.locations[index];
+				parseAIMove(location);								
+			} else {
+				console.log('i dont know'); //для большего поля нужна будет случайная генерация позиции 
+			}
+			}
+	}
 };
 
 
@@ -144,11 +171,18 @@ function init(){ //инициализация игры
 }
 
 
-function hit(location, sym){ //функция записи хода конкретного игрока в соответствующую ячейку
+function hit(location, sym){ //функция записи хода игрока в соответствующую ячейку
 	for (var i = 0; i < (model.boardSize * 2 + 2); i++){
 		var winLine = model.cells[i];
 		var index = winLine.locations.indexOf(location);
-		winLine.hits[index] = sym;
+		if (index >= 0){
+			winLine.hits[index] = sym;
+			if (sym === 'x'){
+				winLine.toWinX++; //чем больше, тем ближе к победе Х
+			} else {
+				winLine.toWinX--;
+			}
+		}
 	}
 }
 
