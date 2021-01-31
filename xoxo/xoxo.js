@@ -29,7 +29,7 @@ var model = { //модель игры
 		this.moves++;
 		for (var i = 0; i < (this.boardSize * 2 + 2); i++){//проверка на комбинацию из трех Х
 			var winLine = this.cells[i];
-			if (winLine.hits.every(function (hit){return hit === 'x'})){
+			if (winLine.hits.every(function (hit){return hit === 'x';})){
 				view.displayMessage('Вы выиграли!');
 				this.gameOver = true;
 				setTimeout(newGame, 500);
@@ -51,7 +51,7 @@ var model = { //модель игры
 		this.moves++;
 		for (var i = 0; i < (this.boardSize * 2 + 2); i++){//проверка на комбинацию из трех О
 			var winLine = this.cells[i];
-			if (winLine.hits.every(function (hit){return hit === 'o'})){
+			if (winLine.hits.every(function (hit){return hit === 'o';})){
 				view.displayMessage('Вы проиграли!');
 				this.gameOver = true;
 				setTimeout(newGame, 500);
