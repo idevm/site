@@ -3,6 +3,10 @@ var view = { //визуальное представление
 	displayMessage: function (msg){ //вывод сообщений
 		document.getElementById('messageArea').innerHTML = msg;
 	},
+
+	displayStat: function (){ //вывод счета
+		document.getElementById('statArea').innerHTML = 'Счет ' + model.playerScore + ' : ' + model.AIScore;
+	},
 	
 	displayX: function (location){ //вывод ходов Х
 		document.getElementById(location).setAttribute('class', 'x');
@@ -22,15 +26,20 @@ var model = { //модель игры
 
 	moves: 0,
 
+	playerScore: 0,
+
+	AIScore: 0,
+
 	playerTurn: function(location){ //ход игрока
 		hit(location, 'x');
 		this.closedCells.push(location);
-		view.displayX(location);
 		this.moves++;
 		for (var i = 0; i < (this.boardSize * 2 + 2); i++){//проверка на комбинацию из трех Х
 			var winLine = this.cells[i];
 			if (winLine.hits.every(function (hit){return hit === 'x';})){
 				view.displayMessage('Вы выиграли!');
+				this.playerScore++;
+				view.displayStat();
 				this.gameOver = true;
 				setTimeout(newGame, 500);
 					for (var j = 0; j < winLine.hits.length; j++){
@@ -47,12 +56,13 @@ var model = { //модель игры
 	AITurn: function(location){ //ход противника, компьютера
 		hit(location, 'o');
 		this.closedCells.push(location);
-		view.displayO(location);
 		this.moves++;
 		for (var i = 0; i < (this.boardSize * 2 + 2); i++){//проверка на комбинацию из трех О
 			var winLine = this.cells[i];
 			if (winLine.hits.every(function (hit){return hit === 'o';})){
 				view.displayMessage('Вы проиграли!');
+				this.AIScore++;
+				view.displayStat();
 				this.gameOver = true;
 				setTimeout(newGame, 500);
 					for (var j = 0; j < winLine.hits.length; j++){
@@ -131,6 +141,10 @@ var controller = { //контроллер
 				location = winLineCloseToWinX.locations[index];
 				parseAIMove(location);								
 			} else {
+				row = Math.floor(Math.random() * model.boardSize);
+				col = Math.floor(Math.random() * model.boardSize);
+				location = row + '' + col;
+				parseAIMove(location);
 				console.log('i dont know'); //для большего поля нужна будет случайная генерация позиции 
 			}
 			}
@@ -158,16 +172,16 @@ function parseAIMove(location){ //валидатор хода компьютер
 
 function init(){ //инициализация игры
 	for (var i = 0; i < model.boardSize; i++){
-	var row = i.toString();
-	for (var j = 0; j < model.boardSize; j++){
-		var col = j.toString();
-		var idBoard = row + col;
-		const location = idBoard;
-		document.getElementById(idBoard).addEventListener('click', function (e){
+		var row = i.toString();
+		for (var j = 0; j < model.boardSize; j++){
+			var col = j.toString();
+			var idBoard = row + col;
+			const location = idBoard;
+			document.getElementById(idBoard).addEventListener('click', function (e){
 			controller.playerMove(location);
-		});
-	}
-	}
+			});
+		}
+	} 
 }
 
 
@@ -179,8 +193,10 @@ function hit(location, sym){ //функция записи хода игрока
 			winLine.hits[index] = sym;
 			if (sym === 'x'){
 				winLine.toWinX++; //чем больше, тем ближе к победе Х
+				view.displayX(location);
 			} else {
 				winLine.toWinX--;
+				view.displayO(location);
 			}
 		}
 	}
@@ -189,7 +205,26 @@ function hit(location, sym){ //функция записи хода игрока
 
 function newGame(){
 	if (confirm('Сыграем еще раз?')){
-		window.location.reload();
+		//window.location.reload();
+		for (var i = 0; i < model.boardSize; i++){
+			var row = i.toString();
+			for (var j = 0; j < model.boardSize; j++){
+				var col = j.toString();
+				var idBoard = row + col;
+				const location = idBoard;
+				document.getElementById(idBoard).classList.remove('x', 'o');
+			}
+		}
+		model.gameOver = false;
+		model.moves = 0;
+		model.closedCells = [];
+		for (var i = 0; i < model.cells.length; i++){
+			var winLine = model.cells[i];
+			winLine.toWinX = 0;
+			for (var j = 0; j < model.boardSize; j++){
+				winLine.hits[j] = '';
+			}
+		}
 	}
 }
 
