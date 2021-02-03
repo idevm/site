@@ -171,6 +171,9 @@ function parseAIMove(location){ //валидатор хода компьютер
 
 
 function init(){ //инициализация игры
+	document.getElementById('button').addEventListener('click', function(e){
+		document.querySelector('#window').style.display = 'none';
+	});
 	for (var i = 0; i < model.boardSize; i++){
 		var row = i.toString();
 		for (var j = 0; j < model.boardSize; j++){
@@ -182,6 +185,7 @@ function init(){ //инициализация игры
 			});
 		}
 	} 
+	view.displayMessage('Ваш ход!');
 }
 
 
@@ -225,6 +229,7 @@ function newGame(){
 				winLine.hits[j] = '';
 			}
 		}
+		view.displayMessage('Ваш ход!');
 	}
 }
 
