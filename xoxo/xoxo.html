@@ -51,40 +51,51 @@
 		div#window {
 			display: block;
 			position: absolute;
-			top: 0px;
-			left: 0px;
-			height: 604px;
-			width: 604px;
+			top: 50px;
+			left: 50px;
+			height: 500px;
+			width: 500px;
 			border: solid blue;
 			background-color: lightgray;
 			text-align: center;
 			margin: auto;
 			z-index: 2;
 			font-size: 50px;
-			font-family: Arial;			
+			font-family: Arial;	
+			border-radius: 10px;		
 		}
 		form, input {
 			color: blue;
 			font-size: 30px;
 			font-family: Arial;			
 		}
+		input {
+			width: 250px;
+			padding: 50px;
+			margin: 10px;
+		}
+		#newGameButton {
+			position: absolute;
+			top: 750px;
+			left: 180px;
+			text-align: center;
+			margin: auto;
+			display: none;
+		}
 	</style>
 </head>
 <body>
 	<div id="messageArea">Крестики-нолики</div>
 	<div id="board">
-	<div id="window">
-		<form id="form">
-			<p><b>За кого будете играть?</b></p>
-  			<p>
-  				<input type="radio" name="answer" value="x" checked=""> Крестики<br>
-  				<input type="radio" name="answer" value="o"> Нолики<br>
-			</p>
-  			<p>
-  				<input id="button" type="button" value="Начать игру!">
-  			</p>
-		</form>
-	</div>
+		<div id="window">
+			<form id="form">
+				<p><b>Выберите символ</b></p>
+  				<p>
+  				<input id="buttonX" type="button" value="Крестики">
+  				<input id="buttonO" type="button" value="Нолики">
+  				</p>
+			</form>
+		</div>
 		<table id="table">
 			<tr>
 				<td id="00"></td>
@@ -102,7 +113,10 @@
 				<td id="22"></td>
 			</tr>
 		</table>
-		<div id="statArea">Счет 0 : 0</div>
+		<div id="statArea"><br></div>
+		<form id="newGameButton">
+			<input type="button" value="Новая игра">
+		</form>
 	</div>
 	<script src="xoxo.js"></script>	
 </body>
