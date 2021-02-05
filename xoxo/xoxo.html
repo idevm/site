@@ -5,6 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=0.5">
 	<title>Крестики-нолики</title>
 	<style type="text/css">
+		@font-face {
+			font-family: 'myFont';
+			src: url('Capture_it-webfont.woff') format('woff');
+		}
 		body {
 			background-color: white;
 		}
@@ -21,7 +25,7 @@
 			color: blue;
 			text-align: center;
 			font-size: 50px;
-			font-family: Arial;
+			font-family: 'myFont', Arial;
 		}
 		div#statArea {
 			position: relative;
@@ -30,7 +34,7 @@
 			color: blue;
 			text-align: center;
 			font-size: 50px;
-			font-family: Arial;			
+			font-family: 'myFont', Arial;			
 		}
 		table {
 			position: absolute;
@@ -61,7 +65,7 @@
 			margin: auto;
 			z-index: 2;
 			font-size: 50px;
-			font-family: Arial;	
+			font-family: Arial;
 			border-radius: 10px;		
 		}
 		form, input {
@@ -71,16 +75,25 @@
 		}
 		input {
 			width: 250px;
-			padding: 50px;
+			padding: 40px;
 			margin: 10px;
 		}
 		#newGameButton {
 			position: absolute;
 			top: 750px;
-			left: 180px;
+			left: 0px;
 			text-align: center;
 			margin: auto;
 			display: none;
+		}
+		#continueGameButton {
+			position: absolute;
+			top: 750px;
+			right: 0px;
+			text-align: center;
+			margin: auto;
+			display: none;
+
 		}
 	</style>
 </head>
@@ -114,8 +127,9 @@
 			</tr>
 		</table>
 		<div id="statArea"><br></div>
-		<form id="newGameButton">
-			<input type="button" value="Новая игра">
+		<form>
+			<input id="newGameButton" type="button" value="Новая игра">
+			<input id="continueGameButton" type="button" value="Продолжить">
 		</form>
 	</div>
 	<script src="xoxo.js"></script>	
