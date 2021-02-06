@@ -36,18 +36,18 @@ div h1 {
 	/*Chrome, Safari, Opera*/
 	@-webkit-keyframes movewords {
 	0%   {left: 0px; top: 0px;}
-	25%  {left: 100px; top: 30px;}
-	50%  {left: 200px; top: 0px;}
-	75%  {left: 300px; top: 30px;}
-	100% {left: 400px; top: 0px;}
+	25%  {left: 50px; top: 30px;}
+	50%  {left: 100px; top: 0px;}
+	75%  {left: 150px; top: 30px;}
+	100% {left: 200px; top: 0px;}
 	}
 	/*Стандартный синтаксис*/
 	@keyframes movewords {
 	0%   {left: 0px; top: 0px;}
-	25%  {left: 100px; top: 30px; color: red;}
-	50%  {left: 200px; top: 0px;}
-	75%  {left: 300px; top: 30px; color: red;}
-	100% {left: 400px; top: 0px;}
+	25%  {left: 50px; top: 30px; color: red;}
+	50%  {left: 100px; top: 0px;}
+	75%  {left: 150px; top: 30px; color: red;}
+	100% {left: 200px; top: 0px;}
 	}
 #logo {
 	position: absolute;
@@ -64,9 +64,9 @@ nav ul {
 }
 nav li {
 	display: inline-block;
-	width: 350px;
-	height: 50px;
+	width: 360px;
 	border-style: solid;
+	margin: 10px;
 	padding: 15px 15px 15px 15px;
 	vertical-align: middle;
 }
