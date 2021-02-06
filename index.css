@@ -26,7 +26,7 @@ div h1 {
 	-webkit-animation-play-state: running;
 	/*Стандартный синтаксис*/
 	animation-name: movewords;
-	animation-duration: 10s;
+	animation-duration: 6s;
 	animation-timing-function: linear;
 	animation-delay: 0s;
 	animation-iteration-count: infinite;

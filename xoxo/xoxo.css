@@ -1,0 +1,95 @@
+@font-face {
+			font-family: 'myFont';
+			src: url('Capture_it-webfont.woff') format('woff');
+		}
+		body {
+			background-color: white;
+		}
+		div#board {
+			position: relative;
+			width: 604px;
+			height: 604px;
+			margin: auto;
+			background: url("board.png") no-repeat;
+		}
+		div#messageArea {
+			position: relative;
+			margin: auto;
+			color: blue;
+			text-align: center;
+			font-size: 50px;
+			font-family: 'myFont', Arial;
+		}
+		div#statArea {
+			position: relative;
+			top: 605px;
+			margin: auto;
+			color: blue;
+			text-align: center;
+			font-size: 50px;
+			font-family: 'myFont', Arial;			
+		}
+		table {
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			border-spacing: 0px;
+		}
+		td {
+			width: 200px;
+			height: 200px;
+		}
+		.x {
+			background: url(x.gif) no-repeat center center;
+		}
+		.o {
+			background: url(o.gif) no-repeat center center;
+		}
+		div#window {
+			display: block;
+			position: absolute;
+			top: 50px;
+			left: 50px;
+			height: 500px;
+			width: 500px;
+			border: solid blue;
+			background-color: lightblue;
+			text-align: center;
+			margin: auto;
+			z-index: 2;
+			font-size: 50px;
+			font-family: Arial;
+			border-radius: 10px;		
+		}
+		#form {
+			position: absolute;
+			top: 50px;
+			color: blue;
+			font-size: 30px;
+			font-family: Arial;			
+		}
+		input {
+			width: 250px;
+			padding: 40px;
+			margin: 10px;
+			color: blue;
+			font-size: 30px;
+			font-family: Arial;						
+		}
+		#newGameButton {
+			position: absolute;
+			top: 750px;
+			left: 0px;
+			text-align: center;
+			margin: auto;
+			display: none;
+		}
+		#continueGameButton {
+			position: absolute;
+			top: 750px;
+			right: 0px;
+			text-align: center;
+			margin: auto;
+			display: none;
+
+		}

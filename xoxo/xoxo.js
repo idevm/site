@@ -52,6 +52,18 @@ var model = { //модель игры
 				this.rounds++;
 				view.displayStat();
 				this.gameOver = true;
+				// for (var j = 0; j < winLine.locations.length; j++){
+				// 	var loc = winLine.locations[j];
+				// 	if (winLine.name === 'row'){
+				// 		document.getElementById(loc).setAttribute('class', 'rowX');
+				// 	} else if (winLine.name === 'col'){
+				// 		document.getElementById(loc).setAttribute('class', 'colX');						
+				// 	} else if (winLine.name === 'di1'){
+				// 		document.getElementById(loc).setAttribute('class', 'di1X');
+				// 	} else {
+				// 		document.getElementById(loc).setAttribute('class', 'di2X');
+				// 	}	
+				// }
 			} 
 		}
 		this.nextTurn(controller.AIMove);
@@ -91,14 +103,14 @@ var model = { //модель игры
 	closedCells: [], // ячейки, в которых сделаны ходы: нужен для предотвращения повторного хода
 	
 	cells: [ //строки, столбцы и диагонали, в которых производятся действия
-		{locations: ['00', '01', '02'], hits: ['', '', '',], toWinX: 0}, // locations - координаты
-		{locations: ['10', '11', '12'], hits: ['', '', '',], toWinX: 0}, // ячеек по строкам, 
-		{locations: ['20', '21', '22'], hits: ['', '', '',], toWinX: 0}, // столбцам и диагоналям; 
-		{locations: ['00', '10', '20'], hits: ['', '', '',], toWinX: 0}, // hits - отмечать ячейки
-		{locations: ['01', '11', '21'], hits: ['', '', '',], toWinX: 0}, // попаданий х и о;
-		{locations: ['02', '12', '22'], hits: ['', '', '',], toWinX: 0}, // toWinX - ближе/дальше к
-		{locations: ['00', '11', '22'], hits: ['', '', '',], toWinX: 0}, // победе;
-		{locations: ['02', '11', '20'], hits: ['', '', '',], toWinX: 0},
+		{name: 'row', locations: ['00', '01', '02'], hits: ['', '', '',], toWinX: 0}, // locations - координаты
+		{name: 'row', locations: ['10', '11', '12'], hits: ['', '', '',], toWinX: 0}, // ячеек по строкам, 
+		{name: 'row', locations: ['20', '21', '22'], hits: ['', '', '',], toWinX: 0}, // столбцам и диагоналям; 
+		{name: 'col', locations: ['00', '10', '20'], hits: ['', '', '',], toWinX: 0}, // hits - отмечать ячейки
+		{name: 'col', locations: ['01', '11', '21'], hits: ['', '', '',], toWinX: 0}, // попаданий х и о;
+		{name: 'col', locations: ['02', '12', '22'], hits: ['', '', '',], toWinX: 0}, // toWinX - ближе/дальше к
+		{name: 'di1', locations: ['00', '11', '22'], hits: ['', '', '',], toWinX: 0}, // победе;
+		{name: 'di2', locations: ['02', '11', '20'], hits: ['', '', '',], toWinX: 0},
 		]
 };
 
