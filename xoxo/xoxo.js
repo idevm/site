@@ -210,7 +210,7 @@ function setGrid(){ // генерация координат ячеек и ус�
 			var idBoard = row + col;
 			const location = idBoard;
 			document.getElementById(idBoard).addEventListener('click', function (e){
-				if (model.currentPlayer !== null){
+				if (document.querySelector('#window').style.display === 'none'){
 					controller.playerMove(location);
 				}
 			});
