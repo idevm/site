@@ -19,6 +19,37 @@ var view = { //визуальное представление
 	displaySym: function (location, sym){ //вывод ходов
 		document.getElementById(location).setAttribute('class', sym);
 	},	
+
+	displayLine: function (name){ // вывод линии трех подряд символов
+		if (name === 'row0'){
+			document.querySelector('#winRow0').style.display = 'block';
+		} else if (name === 'row1'){
+			document.querySelector('#winRow1').style.display = 'block';					
+		} else if (name === 'row2'){
+			document.querySelector('#winRow2').style.display = 'block';										
+		} else if (name === 'col0'){
+			document.querySelector('#winCol0').style.display = 'block';					
+		} else if (name === 'col1'){
+			document.querySelector('#winCol1').style.display = 'block';										
+		} else if (name === 'col2'){
+			document.querySelector('#winCol2').style.display = 'block';															
+		} else if (name === 'dia1'){
+			document.querySelector('#winDia1').style.display = 'block';					
+		} else {
+			document.querySelector('#winDia2').style.display = 'block';
+		}	
+	},
+
+	removeLine: function (){ // стереть победную линию
+		document.querySelector('#winRow0').style.display = 'none';
+		document.querySelector('#winRow1').style.display = 'none';					
+		document.querySelector('#winRow2').style.display = 'none';										
+		document.querySelector('#winCol0').style.display = 'none';					
+		document.querySelector('#winCol1').style.display = 'none';										
+		document.querySelector('#winCol2').style.display = 'none';															
+		document.querySelector('#winDia1').style.display = 'none';					
+		document.querySelector('#winDia2').style.display = 'none';
+	}
 };
 
 
@@ -52,18 +83,7 @@ var model = { //модель игры
 				this.rounds++;
 				view.displayStat();
 				this.gameOver = true;
-				// for (var j = 0; j < winLine.locations.length; j++){
-				// 	var loc = winLine.locations[j];
-				// 	if (winLine.name === 'row'){
-				// 		document.getElementById(loc).setAttribute('class', 'rowX');
-				// 	} else if (winLine.name === 'col'){
-				// 		document.getElementById(loc).setAttribute('class', 'colX');						
-				// 	} else if (winLine.name === 'di1'){
-				// 		document.getElementById(loc).setAttribute('class', 'di1X');
-				// 	} else {
-				// 		document.getElementById(loc).setAttribute('class', 'di2X');
-				// 	}	
-				// }
+				view.displayLine(winLine.name);
 			} 
 		}
 		this.nextTurn(controller.AIMove);
@@ -81,6 +101,7 @@ var model = { //модель игры
 				this.rounds++;
 				view.displayStat();
 				this.gameOver = true;
+				view.displayLine(winLine.name);
 			} 
 		}
 		this.nextTurn(controller.playerMove);
@@ -103,14 +124,14 @@ var model = { //модель игры
 	closedCells: [], // ячейки, в которых сделаны ходы: нужен для предотвращения повторного хода
 	
 	cells: [ //строки, столбцы и диагонали, в которых производятся действия
-		{name: 'row', locations: ['00', '01', '02'], hits: ['', '', '',], toWinX: 0}, // locations - координаты
-		{name: 'row', locations: ['10', '11', '12'], hits: ['', '', '',], toWinX: 0}, // ячеек по строкам, 
-		{name: 'row', locations: ['20', '21', '22'], hits: ['', '', '',], toWinX: 0}, // столбцам и диагоналям; 
-		{name: 'col', locations: ['00', '10', '20'], hits: ['', '', '',], toWinX: 0}, // hits - отмечать ячейки
-		{name: 'col', locations: ['01', '11', '21'], hits: ['', '', '',], toWinX: 0}, // попаданий х и о;
-		{name: 'col', locations: ['02', '12', '22'], hits: ['', '', '',], toWinX: 0}, // toWinX - ближе/дальше к
-		{name: 'di1', locations: ['00', '11', '22'], hits: ['', '', '',], toWinX: 0}, // победе;
-		{name: 'di2', locations: ['02', '11', '20'], hits: ['', '', '',], toWinX: 0},
+		{name: 'row0', locations: ['00', '01', '02'], hits: ['', '', '',], toWinX: 0}, // locations - координаты
+		{name: 'row1', locations: ['10', '11', '12'], hits: ['', '', '',], toWinX: 0}, // ячеек по строкам, 
+		{name: 'row2', locations: ['20', '21', '22'], hits: ['', '', '',], toWinX: 0}, // столбцам и диагоналям; 
+		{name: 'col0', locations: ['00', '10', '20'], hits: ['', '', '',], toWinX: 0}, // hits - отмечать ячейки
+		{name: 'col1', locations: ['01', '11', '21'], hits: ['', '', '',], toWinX: 0}, // попаданий х и о;
+		{name: 'col2', locations: ['02', '12', '22'], hits: ['', '', '',], toWinX: 0}, // toWinX - ближе/дальше к
+		{name: 'dia1', locations: ['00', '11', '22'], hits: ['', '', '',], toWinX: 0}, // победе;
+		{name: 'dia2', locations: ['02', '11', '20'], hits: ['', '', '',], toWinX: 0},
 		]
 };
 
@@ -284,6 +305,7 @@ function clearBoard(){ // очистка поля и статистики тек
 				document.getElementById(idBoard).classList.remove('x', 'o');
 			}
 		}
+		view.removeLine();
 		model.gameOver = false;
 		model.moves = 0;
 		model.closedCells = [];
