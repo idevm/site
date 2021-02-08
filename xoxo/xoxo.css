@@ -41,10 +41,10 @@
 			height: 200px;
 		}
 		.x {
-			background: url(x.gif) no-repeat center center;
+			background: url(x.png) no-repeat center center;
 		}
 		.o {
-			background: url(o.gif) no-repeat center center;
+			background: url(o.png) no-repeat center center;
 		}
 		div#window {
 			display: block;
