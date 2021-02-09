@@ -1,0 +1,252 @@
+body {
+	position: relative;
+width: 375px;
+height: 812px;
+background: #FFFFFF;
+}
+p {
+	position: absolute;
+height: 94px;
+left: calc(50% - 341px/2 - 0.5px);
+top: calc(50% - 94px/2 + 12px);
+
+font-family: Arial;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+}
+footer {
+position: absolute;
+height: 68px;
+left: 0px;
+right: 0px;
+top: 744px;
+
+background: #333333;
+}
+#wtfCat {
+	position: absolute;
+width: 40px;
+height: 40px;
+right: 19px;
+bottom: 14px;
+
+background: #C4C4C4;
+}
+#footerText {
+position: absolute;
+width: 161px;
+height: 35px;
+left: calc(50% - 161px/2 - 31px);
+top: calc(50% - 35px/2 + 3.5px);
+
+font-family: Arial;
+font-style: normal;
+font-weight: normal;
+font-size: 10px;
+line-height: 11px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #FFFFFF;
+
+}
+#content {
+position: absolute;
+height: 434px;
+left: 8px;
+right: 9px;
+top: 224px;
+
+}
+#video {
+	position: relative;
+height: 200px;
+left: 0px;
+right: 0px;
+top: 0px;
+
+background: radial-gradient(69.44% 69.44% at 50% 50%, #C4C4C4 0%, rgba(196, 196, 196, 0) 100%);
+border: 1px solid #000000;
+box-sizing: border-box;
+}
+.v {
+	position: absolute;
+width: 76px;
+height: 16px;
+left: calc(50% - 76px/2 + 1px);
+top: calc(50% - 16px/2 - 1px);
+
+font-family: Arial;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+/* identical to box height */
+
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+
+}
+#cB4 {
+position: relative;
+height: 36px;
+left: 0px;
+right: 0px;
+top: 0px;
+
+background: radial-gradient(69.44% 69.44% at 50% 50%, #C4C4C4 0%, rgba(196, 196, 196, 0) 100%);
+border: 1px solid #000000;
+box-sizing: border-box;
+}
+#cB3 {
+position: relative;
+height: 36px;
+left: 0px;
+right: 0px;
+top: 0px;
+
+background: radial-gradient(69.44% 69.44% at 50% 50%, #C4C4C4 0%, rgba(196, 196, 196, 0) 100%);
+border: 1px solid #000000;
+box-sizing: border-box;
+}
+#cB2 {
+position: relative;
+height: 36px;
+left: 0px;
+right: 0px;
+top: 0px;
+
+background: radial-gradient(69.44% 69.44% at 50% 50%, #C4C4C4 0%, rgba(196, 196, 196, 0) 100%);
+border: 1px solid #000000;
+box-sizing: border-box;
+}
+#cB1 {
+position: relative;
+height: 36px;
+left: 0px;
+right: 0px;
+top: 0px;
+
+background: radial-gradient(69.44% 69.44% at 50% 50%, #C4C4C4 0%, rgba(196, 196, 196, 0) 100%);
+border: 1px solid #000000;
+box-sizing: border-box;
+}
+
+a {
+font-family: Arial;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+
+}
+.a {
+position: absolute;
+height: 16px;
+left: calc(50% - 76px/2 + 1px);
+top: calc(50% - 16px/2 - 1px);
+
+font-family: Arial;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+}
+#logo {
+position: absolute;
+width: 68px;
+height: 68px;
+left: 16px;
+top: 42px;
+
+}
+header {
+position: absolute;
+height: 80px;
+left: 8px;
+right: 9px;
+top: 36px;
+
+
+background: #56CCF2;
+border-radius: 14px;
+}
+#logoText {
+position: absolute;
+width: 107px;
+height: 28px;
+left: calc(50% - 107px/2 - 46.5px);
+top: calc(50% - 28px/2);
+
+font-family: Arial;
+font-style: italic;
+font-weight: bold;
+font-size: 36px;
+line-height: 41px;
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #000000;
+
+}
+#headerText {
+position: absolute;
+width: 140px;
+height: 31px;
+right: 10px;
+top: 26px;
+
+font-family: Arial;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+display: flex;
+align-items: center;
+text-align: right;
+
+color: #000000;
+
+}
+#intro {
+position: absolute;
+height: 84px;
+left: 8px;
+right: 9px;
+top: 116px;
+
+
+font-family: Arial;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+
+}
