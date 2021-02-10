@@ -3,11 +3,11 @@ var view = { //визуальное представление
 	displayMessage: function (msg){ //вывод сообщений
 		document.getElementById('messageArea').innerHTML = msg;
 		if (msg === 'Вы выиграли!'){
-			document.querySelector('#messageArea').style.color = 'green';
+			document.querySelector('#messageArea').style.color = '#42A61F';
 		} else if (msg === 'Вы проиграли!'){
-			document.querySelector('#messageArea').style.color = 'red';
+			document.querySelector('#messageArea').style.color = '#FF0000';
 		} else {
-			document.querySelector('#messageArea').style.color = 'blue';
+			document.querySelector('#messageArea').style.color = '#1371C8';
 		}
 	},
 
@@ -220,7 +220,22 @@ function init(){ //инициализация игры (стартового э�
 	document.getElementById('buttonO').onclick = function(){start('o')};
 	document.getElementById('newGameButton').onclick = newGame;
 	document.getElementById('continueGameButton').onclick = continueGame;
+	document.getElementById('colorMode').onclick = changeColorScheme;
 	view.displayStat();	
+}
+
+function changeColorScheme(){
+	if (document.getElementById('colorMode').classList.contains('lightMode')){
+		document.getElementById('colorMode').setAttribute('class', 'darkMode');
+		document.body.setAttribute('class', 'darkBody');
+		// document.querySelector('#window').style.background === '#222222';
+		console.log('dark');
+	} else {
+		document.getElementById('colorMode').setAttribute('class', 'lightMode');
+		document.body.setAttribute('class', 'lightBody');
+		// document.querySelector('#window').style.background === 'white';
+		console.log('light');		
+	}
 }
 
 function setGrid(){ // генерация координат ячеек и установка слушателя для кликов игрока

@@ -2,8 +2,26 @@
 			font-family: 'myFont';
 			src: url('Capture_it-webfont.woff') format('woff');
 		}
-		body {
-			background-color: white;
+		body {}
+		.darkBody {
+			background: #222222;
+		}
+		.lightBody {
+			background: white;
+		}
+		#colorMode {
+			position: absolute;
+			top: 5px;
+			right: 5px;
+			width: 48px;
+			height: 48px;
+			margin: auto;
+		}
+		.darkMode {
+			background: url(lightMode.png) no-repeat center center;
+		}
+		.lightMode {
+			background: url(darkMode.png) no-repeat center center;
 		}
 		div#board {
 			position: relative;
@@ -15,7 +33,7 @@
 		div#messageArea {
 			position: relative;
 			margin: auto;
-			color: blue;
+			color: #1371C8;
 			text-align: center;
 			font-size: 50px;
 			font-family: 'myFont', Arial;
@@ -24,7 +42,7 @@
 			position: relative;
 			top: 605px;
 			margin: auto;
-			color: blue;
+			color: #1371C8;
 			text-align: center;
 			font-size: 50px;
 			font-family: 'myFont', Arial;
@@ -53,8 +71,8 @@
 			left: 50px;
 			height: 500px;
 			width: 500px;
-			border: solid blue;
-			background-color: lightblue;
+			border: solid #1371C8;
+			background: lightblue;
 			text-align: center;
 			margin: auto;
 			z-index: 2;
