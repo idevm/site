@@ -32,14 +32,14 @@
 		.lightMode {
 			background: url(darkMode.png) no-repeat center center;
 		}
-		div#board {
+		#board {
 			position: relative;
 			width: 604px;
 			height: 604px;
 			margin: auto;
 			background: url("board.png") no-repeat;
 		}
-		div#messageArea {
+		#messageArea {
 			position: relative;
 			margin: auto;
 			color: #1371C8;
@@ -47,7 +47,7 @@
 			font-size: 50px;
 			font-family: 'myFont', Arial;
 		}
-		div#statArea {
+		#statArea {
 			position: relative;
 			top: 605px;
 			margin: auto;
@@ -73,7 +73,7 @@
 		.o {
 			background: url(o.png) no-repeat center center;
 		}
-		div#window {
+		#window {
 			display: block;
 			position: absolute;
 			top: 50px;
@@ -81,13 +81,18 @@
 			height: 500px;
 			width: 500px;
 			border: solid #1371C8;
-			background: lightblue;
 			text-align: center;
 			margin: auto;
 			z-index: 2;
 			font-size: 50px;
 			font-family: Arial;
 			border-radius: 10px;		
+		}
+		.lightWindow {
+			background: #85C8DD;
+		}
+		.darkWindow {
+			background: radial-gradient(85.7% 85.7% at 50% 50%, #74D7F7 0%, #000000 100%);			
 		}
 		#winLine {
 			position: absolute;
@@ -122,35 +127,94 @@
 		.dia2 {
 			background: url('winDia2.png') no-repeat;	
 		}
-		#form {
+		#chooseSymbol {
 			position: absolute;
-			top: 50px;
+			width: 417px;
+			height: 84px;
+			left: 42px;
+			top: 101px;
 			color: blue;
-			font-size: 30px;
+			font-size: 36px;
 			font-family: Arial;			
 		}
-		input {
-			width: 250px;
-			padding: 40px;
-			margin: 10px;
-			color: blue;
-			font-size: 30px;
-			font-family: Arial;						
+		#buttonX {
+			position: absolute;
+			width: 198px;
+			height: 148px;
+			left: 42px;
+			top: 258px;
+			background: url('xButton.png');
+		}
+		#buttonO {
+			position: absolute;
+			width: 198px;
+			height: 148px;
+			left: 269px;
+			top: 258px;
+			background: url('oButton.png');			
 		}
 		#newGameButton {
 			position: absolute;
 			top: 750px;
 			left: 0px;
 			text-align: center;
-			margin: auto;
+			line-height: 140px;
+			margin: 0px 20px;
 			display: none;
+			background: url('button.png') no-repeat center center;
+			width: 198px;
+			height: 148px;
+			color: white;
+			font-size: 30px;
+			font-family: Arial;
+			vertical-align: middle;
 		}
 		#continueGameButton {
 			position: absolute;
 			top: 750px;
 			right: 0px;
 			text-align: center;
-			margin: auto;
+			line-height: 140px;
+			margin: 0px 20px;
 			display: none;
-
+			background: url('button.png') no-repeat center center;
+			width: 198px;
+			height: 148px;
+			color: white;
+			font-size: 30px;
+			font-family: Arial;
+		}
+		#newGameButton, #continueGameButton, #window {
+					/*Chrome, Safari, Opera*/
+			-webkit-animation-name: showButtons;
+			-webkit-animation-duration: 0.5s;
+			-webkit-animation-timing-function: linear;
+			-webkit-animation-delay: 0s;
+			-webkit-animation-iteration-count: 1;
+			-webkit-animation-direction: normal;
+			-webkit-animation-play-state: running;
+			/*Стандартный синтаксис*/
+			animation-name: showButtons;
+			animation-duration: 0.5s;
+			animation-timing-function: linear;
+			animation-delay: 0s;
+			animation-iteration-count: 1;
+			animation-direction: normal;
+			animation-play-state: running;
+		}
+		/*Chrome, Safari, Opera*/
+		@-webkit-keyframes showButtons {
+			0%   {opacity: 0%;}
+			25%  {opacity: 25%;}
+			50%  {opacity: 50%;}
+			75%  {opacity: 75%;}
+			100% {opacity: 100%;}
+		}
+		/*Стандартный синтаксис*/
+		@keyframes showButtons {
+			0%   {opacity: 0%;}
+			25%  {opacity: 25%;}
+			50%  {opacity: 50%;}
+			75%  {opacity: 75%;}
+			100% {opacity: 100%;}
 		}

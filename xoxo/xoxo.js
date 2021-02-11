@@ -207,9 +207,11 @@ function changeColorScheme(){ // смена стиля экрана (светл�
 	if (document.getElementById('colorMode').classList.contains('lightMode')){
 		document.getElementById('colorMode').setAttribute('class', 'darkMode');
 		document.body.setAttribute('class', 'darkBody');
+		document.getElementById('window').setAttribute('class', 'darkWindow');
 	} else {
 		document.getElementById('colorMode').setAttribute('class', 'lightMode');
 		document.body.setAttribute('class', 'lightBody');
+		document.getElementById('window').setAttribute('class', 'lightWindow');
 	}
 }
 

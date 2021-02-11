@@ -26,14 +26,12 @@
 	<div id="messageArea">Крестики-нолики</div>
 	<div id="colorMode" class="lightMode"></div>
 	<div id="board">
-		<div id="window">
-			<form id="form">
+		<div id="window" class="lightWindow">
+			<div id="chooseSymbol">
 				<p><b>Выберите символ</b></p>
-  				<p>
-  				<input id="buttonX" type="button" value="Крестик">
-  				<input id="buttonO" type="button" value="Нолик">
-  				</p>
-			</form>
+  			</div>	
+  			<div id="buttonX"></div>
+  			<div id="buttonO"></div>  				
 		</div>
 		<table id="table">
 			<tr>
@@ -54,10 +52,8 @@
 		</table>
 		<div id="winLine"></div>
 		<div id="statArea"></div>
-		<form>
-			<input id="newGameButton" type="button" value="Новая игра">
-			<input id="continueGameButton" type="button" value="Продолжить">
-		</form>
+		<div id="newGameButton">Новая игра</div>
+		<div id="continueGameButton">Продолжить</div>
 	</div>
 	<script src="xoxo.js"></script>	
 </body>
