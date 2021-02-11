@@ -228,13 +228,9 @@ function changeColorScheme(){
 	if (document.getElementById('colorMode').classList.contains('lightMode')){
 		document.getElementById('colorMode').setAttribute('class', 'darkMode');
 		document.body.setAttribute('class', 'darkBody');
-		// document.querySelector('#window').style.background === '#222222';
-		console.log('dark');
 	} else {
 		document.getElementById('colorMode').setAttribute('class', 'lightMode');
 		document.body.setAttribute('class', 'lightBody');
-		// document.querySelector('#window').style.background === 'white';
-		console.log('light');		
 	}
 }
 
