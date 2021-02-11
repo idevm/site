@@ -234,7 +234,11 @@ function setGrid(){ // генерация координат ячеек и ус�
 function start (sym){ // старт игры
 	document.querySelector('#window').style.display = 'none';
 	document.querySelector('#newGameButton').style.display = 'block';
-	document.querySelector('#continueGameButton').style.display = 'block';	
+	document.querySelector('#continueGameButton').style.display = 'block';
+	document.getElementById('#newGameButton').style.webkitAnimationPlayState = 'running';
+	document.getElementById('#newGameButton').style.AnimationPlayState = 'running';
+	document.getElementById('#continueGameButton').style.webkitAnimationPlayState = 'running';
+	document.getElementById('#continueGameButton').style.AnimationPlayState = 'running';		
 	setGrid();
 	view.displayStat();
 	view.displayMessage('Ваш ход!')
@@ -257,7 +261,9 @@ function newGame(){ // создание новой игры
 	model.currentAI = null;
 	document.querySelector('#window').style.display = 'block';
 	document.querySelector('#newGameButton').style.display = 'none';
-	document.querySelector('#continueGameButton').style.display = 'none';	
+	document.querySelector('#continueGameButton').style.display = 'none';
+	document.getElementById('#window').style.webkitAnimationPlayState = 'running';
+	document.getElementById('#window').style.AnimationPlayState = 'running';				
 	view.displayMessage('Крестики-нолики');
 	view.displayStat();
 }
