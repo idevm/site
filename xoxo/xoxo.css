@@ -89,85 +89,38 @@
 			font-family: Arial;
 			border-radius: 10px;		
 		}
-		div#winRow0 {
+		#winLine {
 			position: absolute;
 			left: 0px;
 			top: 0px;
 			width: 604px;
 			height: 604px;
 			margin: auto;
+			display: none;			
+		}
+		.row0 {
 			background: url('winRow0.png') no-repeat;	
-			display: none;		
 		}
-		div#winRow1 {
-			position: absolute;
-			left: 0px;
-			top: 0px;
-			width: 604px;
-			height: 604px;
-			margin: auto;
+		.row1 {
 			background: url('winRow1.png') no-repeat;	
-			display: none;		
 		}
-		div#winRow2 {
-			position: absolute;
-			left: 0px;
-			top: 0px;
-			width: 604px;
-			height: 604px;
-			margin: auto;
+		.row2 {
 			background: url('winRow2.png') no-repeat;	
-			display: none;		
 		}
-		div#winCol0 {
-			position: absolute;
-			left: 0px;
-			top: 0px;
-			width: 604px;
-			height: 604px;
-			margin: auto;
+		.col0 {
 			background: url('winCol0.png') no-repeat;	
-			display: none;		
 		}
-		div#winCol1 {
-			position: absolute;
-			left: 0px;
-			top: 0px;
-			width: 604px;
-			height: 604px;
-			margin: auto;
+		.col1 {
 			background: url('winCol1.png') no-repeat;	
-			display: none;		
 		}
-		div#winCol2 {
-			position: absolute;
-			left: 0px;
-			top: 0px;
-			width: 604px;
-			height: 604px;
-			margin: auto;
+		.col2 {
 			background: url('winCol2.png') no-repeat;	
-			display: none;		
 		}
-		div#winDia1 {
-			position: absolute;
-			left: 0px;
-			top: 0px;
-			width: 604px;
-			height: 604px;
-			margin: auto;
+		.dia1 {
 			background: url('winDia1.png') no-repeat;	
-			display: none;		
 		}
-		div#winDia2 {
-			position: absolute;
-			left: 0px;
-			top: 0px;
-			width: 604px;
-			height: 604px;
-			margin: auto;
+		.dia2 {
 			background: url('winDia2.png') no-repeat;	
-			display: none;		
 		}
 		#form {
 			position: absolute;

@@ -21,34 +21,13 @@ var view = { //визуальное представление
 	},	
 
 	displayLine: function (name){ // вывод линии трех подряд символов
-		if (name === 'row0'){
-			document.querySelector('#winRow0').style.display = 'block';
-		} else if (name === 'row1'){
-			document.querySelector('#winRow1').style.display = 'block';					
-		} else if (name === 'row2'){
-			document.querySelector('#winRow2').style.display = 'block';										
-		} else if (name === 'col0'){
-			document.querySelector('#winCol0').style.display = 'block';					
-		} else if (name === 'col1'){
-			document.querySelector('#winCol1').style.display = 'block';										
-		} else if (name === 'col2'){
-			document.querySelector('#winCol2').style.display = 'block';															
-		} else if (name === 'dia1'){
-			document.querySelector('#winDia1').style.display = 'block';					
-		} else {
-			document.querySelector('#winDia2').style.display = 'block';
-		}	
+		document.getElementById('winLine').style.display = 'block';
+		document.getElementById('winLine').setAttribute('class', name);				
 	},
 
 	removeLine: function (){ // стереть победную линию
-		document.querySelector('#winRow0').style.display = 'none';
-		document.querySelector('#winRow1').style.display = 'none';					
-		document.querySelector('#winRow2').style.display = 'none';										
-		document.querySelector('#winCol0').style.display = 'none';					
-		document.querySelector('#winCol1').style.display = 'none';										
-		document.querySelector('#winCol2').style.display = 'none';															
-		document.querySelector('#winDia1').style.display = 'none';					
-		document.querySelector('#winDia2').style.display = 'none';
+		document.getElementById('winLine').classList = [];
+		document.getElementById('winLine').style.display = 'none';		
 	}
 };
 
@@ -224,7 +203,7 @@ function init(){ //инициализация игры (стартового э�
 	view.displayStat();	
 }
 
-function changeColorScheme(){
+function changeColorScheme(){ // смена стиля экрана (светлый\темный)
 	if (document.getElementById('colorMode').classList.contains('lightMode')){
 		document.getElementById('colorMode').setAttribute('class', 'darkMode');
 		document.body.setAttribute('class', 'darkBody');
