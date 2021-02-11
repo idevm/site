@@ -10,7 +10,13 @@
 			background: white;
 		}
 		#loadImages {
-			display: none;
+			display: block;
+			opacity: 0%;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			height: 200px;
+			width: 200px;
 		}
 		#colorMode {
 			position: absolute;
