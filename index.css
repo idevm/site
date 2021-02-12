@@ -5,29 +5,34 @@ body {
 a {
 	color: white;
 	text-decoration: none;
-	font-size: 20px;
+	font-size: 24px;
+	padding: 100px 20px 10px 20px;
+
 }
 
 header {
-	position: absolute;
-	height: 116px;
-	left: 0px;
-	right: 0px;
-	top: 0px;
-	background: linear-gradient(180deg, #56CCF2 0%, #FFFFFF 121.12%);
+position: absolute;
+height: 116px;
+left: 0px;
+right: 0px;
+top: 0px;
+
+
+background: linear-gradient(180deg, #56CCF2 0%, #FFFFFF 121.12%);
 }
 
 #logo {
-	position: absolute;
+position: absolute;
 width: 68px;
 height: 68px;
 left: 24px;
 top: 24px;
+
 background: url("logo.png");
 }
 
 #logoText {
-	position: absolute;
+position: absolute;
 width: 176px;
 height: 116px;
 left: 120px;
@@ -40,17 +45,16 @@ font-size: 36px;
 line-height: 41px;
 display: flex;
 align-items: center;
-text-align: center;
 
 color: #000000;
 
 }
 
 #headerText {
-	position: absolute;
+position: absolute;
 height: 116px;
 left: 296px;
-right: 40px;
+right: 0px;
 top: 0px;
 
 font-family: Arial;
@@ -58,17 +62,18 @@ font-style: italic;
 font-weight: bold;
 font-size: 24px;
 line-height: 100%;
+/* or 24px */
 
 display: flex;
 align-items: center;
-text-align: right;
+text-align: center;
 
 color: #000000;
 
 }
 
 #intro {
-	position: absolute;
+position: absolute;
 height: 208px;
 left: 40px;
 right: 40px;
@@ -89,70 +94,105 @@ color: #000000;
 
 #content {
 position: absolute;
-left: 0px;
-right: 0px;
-top: 324px;
+height: 417px;
+left: 40px;
+right: 40px;
+top: 364px;
 
-border: 1px solid #000000;
-box-sizing: border-box;
 }
 
 #cB1, #cB2, #cB3, #cB4 {
-position: relative;
-width: 328px;
-height: 150px;
-left: 0px;
-top: 0px;
+font-family: Arial;
+font-style: normal;
+font-weight: normal;
+font-size: 24px;
+line-height: 28px;
+display: flex;
+align-items: center;
+color: #FFFFFF;
+}
 
+#cB1 {
+position: absolute;
+width: 328px;
+height: 180px;
+left: calc(50% - 328px/2 - 195px);
+top: 0px;
+background-image: url(XObox.png);
+}
+
+#cB2 {
+position: absolute;
+width: 328px;
+height: 180px;
+left: calc(50% - 328px/2 + 195px);
+top: 0px;
+background-image: url(BtlshpBox.png);
+}
+
+#cB3 {
+position: absolute;
+width: 328px;
+height: 180px;
+left: calc(50% - 328px/2 - 195px);
+top: 237px;
+background-image: url(Receipts.png);
+}
+
+#cB4 {
+position: absolute;
+width: 328px;
+height: 181px;
+left: calc(50% - 328px/2 + 195px);
+top: 236px;
 background: linear-gradient(254.34deg, #E1E1E1 1.52%, #5C5C5C 47.29%, #000000 100%);
 }
 
 #video {
-	position: absolute;
+position: absolute;
 width: 428px;
 height: 240px;
 right: 40px;
-top: 680px;
+top: 928px;
 
 background: #C4C4C4;
 }
 
 footer {
-	position: absolute;
+position: absolute;
 height: 68px;
 left: 0px;
 right: 0px;
-top: 956px;
+top: 1262px;
 
 background: #000000;
 }
 
 #footerText {
 position: absolute;
-height: 67px;
-left: 40px;
-right: 40px;
-top: 957px;
+left: 0.25%;
+right: 9.25%;
+top: 0%;
+bottom: 1.47%;
 
 font-family: Arial;
 font-style: normal;
 font-weight: normal;
 font-size: 13px;
-line-height: 15px;
-display: flex;
+line-height: 68px;
+display: block;
 align-items: center;
 text-align: center;
 
 color: #FFFFFF;
-
 }
 
 #wtfCat {
 position: absolute;
 width: 40px;
-height: 40px;
-right: 14px;
-top: 970px;
+right: 22px;
+top: 14px;
+bottom: 14px;
 
 background: #C4C4C4;
 }
