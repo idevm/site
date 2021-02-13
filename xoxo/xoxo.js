@@ -19,6 +19,11 @@ var view = { //визуальное представление
 	
 	displaySym: function (location, sym){ //вывод ходов
 		document.getElementById(location).setAttribute('class', sym);
+		if (sym === 'x'){
+			document.getElementById('x').play();
+		} else {
+			document.getElementById('o').play();
+		}
 	},	
 
 	displayLine: function (name){ // вывод линии трех подряд символов
@@ -67,6 +72,7 @@ var model = { //модель игры
 			var winLine = this.cells[i];
 			if (winLine.hits.every(function (hit){return hit === model.currentPlayer;})){
 				view.displayMessage('Вы выиграли!');
+				document.getElementById('win').play();
 				this.playerScore++;
 				this.rounds++;
 				view.displayStat();
@@ -88,6 +94,7 @@ var model = { //модель игры
 			var winLine = this.cells[i];
 			if (winLine.hits.every(function (hit){return hit === model.currentAI;})){
 				view.displayMessage('Вы проиграли!');
+				document.getElementById('fail').play();
 				this.AIScore++;
 				this.rounds++;
 				view.displayStat();
@@ -107,6 +114,7 @@ var model = { //модель игры
 			setTimeout(function(){nextPlayer();}, 750); // длительность передачи хода (по факту - время на ход компьютера)
 		} else if (!this.gameOver && this.moves == (this.boardSize * this.boardSize)) {
 			view.displayMessage('Ничья!');
+			document.getElementById('gameOver').play();
 			this.rounds++;
 			view.displayStat();
 			this.gameOver = true;
@@ -210,12 +218,13 @@ function shuffle (arr){ // перемешивание позиций элеме�
 }
 
 function init(){ //инициализация игры (стартового экрана)
-	document.getElementById('buttonX').onclick = function(){start('x')}; 
-	document.getElementById('buttonO').onclick = function(){start('o')};
-	document.getElementById('newGameButton').onclick = newGame;
-	document.getElementById('continueGameButton').onclick = continueGame;
-	document.getElementById('soundMode').onclick = changeMusic;	
-	document.getElementById('colorMode').onclick = changeColorScheme;
+	document.getElementById('buttonX').onclick = function(){start('x'); document.getElementById('click').play();}; 
+	document.getElementById('buttonO').onclick = function(){start('o'); document.getElementById('click').play();};
+	document.getElementById('newGameButton').onclick = function(){newGame(); document.getElementById('clock').play();}; 
+	document.getElementById('continueGameButton').onclick = function(){continueGame(); document.getElementById('clock').play();};
+	document.getElementById('soundMode').onclick = function(){changeMusic(); document.getElementById('clock').play();};
+	// document.querySelectorAll('.sounds').forEach(function(item){item.volume = 0});	
+	document.getElementById('colorMode').onclick = function(){changeColorScheme(); document.getElementById('clock').play();};
 	view.displayStat();	
 }
 
@@ -234,11 +243,10 @@ function changeColorScheme(){ // смена стиля экрана (светл�
 function changeMusic(){ // смена режима фоновой музыки
 	if (document.getElementById('soundMode').classList.contains('sound')){
 		document.getElementById('soundMode').setAttribute('class', 'mute');
-		document.getElementById('music').pause();
+		document.querySelectorAll('.sounds').forEach(function(item){item.volume = 0});
 	} else {
 		document.getElementById('soundMode').setAttribute('class', 'sound');
-		document.getElementById('music').play();
-		document.getElementById('music').volume = 0.1;				
+		document.querySelectorAll('.sounds').forEach(function(item){item.volume = 1});
 	}
 }
 
@@ -273,7 +281,8 @@ function start (sym){ // старт игры
 	} else {
 		model.currentPlayer = 'o';
 		model.currentAI = 'x';
-		controller.AIMove();
+		setTimeout(function(){controller.AIMove();}, 750);
+		view.displayMessage('Ход противника!');
 	}
 };
 
