@@ -351,11 +351,15 @@ function clearBoard(){ // очистка поля и статистики тек
 function continueGame(){ // начало новой партии текущей игры
 	if (model.gameOver === true){
 		clearBoard();
-		view.displayMessage('Ваш ход!');
-		if (model.currentPlayer === 'o'){
-			controller.AIMove();
+		if (model.currentPlayer === 'x'){
+			view.displayMessage('Ваш ход!');
+		} else {
+			setTimeout(function(){controller.AIMove();}, 750);
+			view.displayMessage('Ход противника!');
 		}
 	}
 }
+
+
 
 window.onload = init;
