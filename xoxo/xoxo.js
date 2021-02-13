@@ -1,7 +1,8 @@
 var view = { //визуальное представление
 	
 	displayMessage: function (msg){ //вывод сообщений
-		document.getElementById('messageArea').innerHTML = msg;
+		show(msg);
+		// document.getElementById('messageArea').innerHTML = msg;
 		if (msg === 'Вы выиграли!'){
 			document.querySelector('#messageArea').style.color = '#42A61F';
 		} else if (msg === 'Вы проиграли!'){
@@ -31,6 +32,14 @@ var view = { //визуальное представление
 	}
 };
 
+function show (msg){ // анимация строки сообщения
+	var letters = msg.split('');
+	var liveStr = ''
+	for (let i = 0; i < letters.length; i++){
+   		setTimeout(function(){liveStr = liveStr + letters[i];
+		document.getElementById('messageArea').innerHTML = liveStr}, i*20);
+   }
+}
 
 var model = { //модель игры
 	
@@ -63,7 +72,10 @@ var model = { //модель игры
 				view.displayStat();
 				this.gameOver = true;
 				view.displayLine(winLine.name);
-			} 
+			}
+		}
+		if (!this.gameOver && this.moves < (this.boardSize * this.boardSize)){
+			view.displayMessage('Ход противника!');
 		}
 		this.nextTurn(controller.AIMove);
 	},
@@ -81,7 +93,10 @@ var model = { //модель игры
 				view.displayStat();
 				this.gameOver = true;
 				view.displayLine(winLine.name);
-			} 
+			}
+		}
+		if (!this.gameOver && this.moves < (this.boardSize * this.boardSize)){
+			view.displayMessage('Ваш ход!');
 		}
 		this.nextTurn(controller.playerMove);
 	},
@@ -89,7 +104,7 @@ var model = { //модель игры
 	nextTurn: function (nextPlayer) { //передача хода
  		shuffle(model.cells);
  		if (!this.gameOver && this.moves < (this.boardSize * this.boardSize)){
-			nextPlayer();
+			setTimeout(function(){nextPlayer();}, 750); // длительность передачи хода (по факту - время на ход компьютера)
 		} else if (!this.gameOver && this.moves == (this.boardSize * this.boardSize)) {
 			view.displayMessage('Ничья!');
 			this.rounds++;
@@ -120,7 +135,7 @@ var controller = { //контроллер
 	playerMove: function(location){ //прием хода игрока
 		if (location) {
 			parseMove(location);
-		}	
+		}
 	},
 	
 	AIMove: function(){ //прием хода компьютера и логика ходов
@@ -236,7 +251,8 @@ function setGrid(){ // генерация координат ячеек и ус�
 			var idBoard = row + col;
 			const location = idBoard;
 			document.getElementById(idBoard).addEventListener('click', function (e){
-				if (document.querySelector('#window').style.display === 'none'){
+				if (document.querySelector('#window').style.display === 'none' && 
+					document.getElementById('messageArea').innerHTML !== 'Ход противника!'){
 					controller.playerMove(location);
 				}
 			});
