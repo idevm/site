@@ -199,6 +199,7 @@ function init(){ //инициализация игры (стартового э�
 	document.getElementById('buttonO').onclick = function(){start('o')};
 	document.getElementById('newGameButton').onclick = newGame;
 	document.getElementById('continueGameButton').onclick = continueGame;
+	document.getElementById('soundMode').onclick = changeMusic;	
 	document.getElementById('colorMode').onclick = changeColorScheme;
 	view.displayStat();	
 }
@@ -214,6 +215,18 @@ function changeColorScheme(){ // смена стиля экрана (светл�
 		document.getElementById('window').setAttribute('class', 'lightWindow');
 	}
 }
+
+function changeMusic(){ // смена режима фоновой музыки
+	if (document.getElementById('soundMode').classList.contains('sound')){
+		document.getElementById('soundMode').setAttribute('class', 'mute');
+		document.getElementById('music').pause();
+	} else {
+		document.getElementById('soundMode').setAttribute('class', 'sound');
+		document.getElementById('music').play();
+		document.getElementById('music').volume = 0.1;				
+	}
+}
+
 
 function setGrid(){ // генерация координат ячеек и установка слушателя для кликов игрока
 	for (var i = 0; i < model.boardSize; i++){

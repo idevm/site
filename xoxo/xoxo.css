@@ -16,6 +16,20 @@
 			top: 0px;
 			left: 0px;
 		}
+		#soundMode {
+			position: absolute;
+			top:  40px;
+			left: calc(50% - 604px / 2 - 80px);
+			width: 48px;
+			height: 48px;
+			margin: auto;
+		}
+		.mute {
+			background: url(mute.png);
+		}
+		.sound {
+			background: url(sound.png);
+		}
 		#colorMode {
 			position: absolute;
 			top:  40px;
@@ -25,10 +39,10 @@
 			margin: auto;
 		}
 		.darkMode {
-			background: url(lightMode.png) no-repeat center center;
+			background: url(darkMode.png) no-repeat center center;
 		}
 		.lightMode {
-			background: url(darkMode.png) no-repeat center center;
+			background: url(lightMode.png) no-repeat center center;
 		}
 		#board {
 			position: relative;
