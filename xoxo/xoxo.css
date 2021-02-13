@@ -2,7 +2,8 @@
 			font-family: 'myFont';
 			src: url('Capture_it-webfont.woff') format('woff');
 		}
-		body {}
+		body {
+		}
 		.darkBody {
 			background: #222222;
 		}
