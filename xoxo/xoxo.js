@@ -42,7 +42,7 @@ function show (msg){ // анимация строки сообщения
 	var liveStr = ''
 	for (let i = 0; i < letters.length; i++){
    		setTimeout(function(){liveStr = liveStr + letters[i];
-		document.getElementById('messageArea').innerHTML = liveStr}, i*20);
+		document.getElementById('messageArea').innerHTML = liveStr;}, i*20);
    }
 }
 
@@ -64,6 +64,8 @@ var model = { //модель игры
 
 	currentAI: null, // символ противника
 
+	currentMove: null, // текущий ход
+
 	playerTurn: function(location){ //ход игрока
 		hit(location, model.currentPlayer);
 		this.closedCells.push(location);
@@ -82,6 +84,7 @@ var model = { //модель игры
 		}
 		if (!this.gameOver && this.moves < (this.boardSize * this.boardSize)){
 			view.displayMessage('Ход противника!');
+			this.currentMove = this.currentAI;
 		}
 		this.nextTurn(controller.AIMove);
 	},
@@ -104,6 +107,7 @@ var model = { //модель игры
 		}
 		if (!this.gameOver && this.moves < (this.boardSize * this.boardSize)){
 			view.displayMessage('Ваш ход!');
+			this.currentMove = this.currentPlayer;
 		}
 		this.nextTurn(controller.playerMove);
 	},
@@ -133,7 +137,7 @@ var model = { //модель игры
 		{name: 'col1', locations: ['01', '11', '21'], hits: ['', '', '',], toWinX: 0}, // попаданий х и о;
 		{name: 'col2', locations: ['02', '12', '22'], hits: ['', '', '',], toWinX: 0}, // toWinX - ближе/дальше к
 		{name: 'dia1', locations: ['00', '11', '22'], hits: ['', '', '',], toWinX: 0}, // победе;
-		{name: 'dia2', locations: ['02', '11', '20'], hits: ['', '', '',], toWinX: 0},
+		{name: 'dia2', locations: ['02', '11', '20'], hits: ['', '', '',], toWinX: 0}, // name - для вывода winLine
 		]
 };
 
@@ -193,7 +197,7 @@ function parseMove(location){ //валидатор хода игрока
 	if ((model.closedCells.indexOf(location) < 0) && (!model.gameOver)){
 		model.playerTurn(location);
 	} else {
-		return false;
+		view.displayMessage('Ячейка занята!');
 	}
 }
 
@@ -218,13 +222,31 @@ function shuffle (arr){ // перемешивание позиций элеме�
 }
 
 function init(){ //инициализация игры (стартового экрана)
-	document.getElementById('buttonX').onclick = function(){start('x'); document.getElementById('click').play();}; 
-	document.getElementById('buttonO').onclick = function(){start('o'); document.getElementById('click').play();};
-	document.getElementById('newGameButton').onclick = function(){newGame(); document.getElementById('clock').play();}; 
-	document.getElementById('continueGameButton').onclick = function(){continueGame(); document.getElementById('clock').play();};
-	document.getElementById('soundMode').onclick = function(){changeMusic(); document.getElementById('clock').play();};
+	document.getElementById('buttonX').onclick = function(){
+		start('x'); 
+		document.getElementById('click').play();
+	}; 
+	document.getElementById('buttonO').onclick = function(){
+		start('o'); 
+		document.getElementById('click').play();
+	};
+	document.getElementById('newGameButton').onclick = function(){
+		newGame(); 
+		document.getElementById('clock').play();
+	}; 
+	document.getElementById('continueGameButton').onclick = function(){
+		continueGame(); 
+		document.getElementById('clock').play();
+	};
+	document.getElementById('soundMode').onclick = function(){
+		changeMusic(); 
+		document.getElementById('clock').play();
+	};
 	// document.querySelectorAll('.sounds').forEach(function(item){item.volume = 0});	
-	document.getElementById('colorMode').onclick = function(){changeColorScheme(); document.getElementById('clock').play();};
+	document.getElementById('colorMode').onclick = function(){
+		changeColorScheme(); 
+		document.getElementById('clock').play();
+	};
 	view.displayStat();	
 }
 
@@ -250,7 +272,6 @@ function changeMusic(){ // смена режима фоновой музыки
 	}
 }
 
-
 function setGrid(){ // генерация координат ячеек и установка слушателя для кликов игрока
 	for (var i = 0; i < model.boardSize; i++){
 		var row = i.toString();
@@ -260,7 +281,7 @@ function setGrid(){ // генерация координат ячеек и ус�
 			const location = idBoard;
 			document.getElementById(idBoard).addEventListener('click', function (e){
 				if (document.querySelector('#window').style.display === 'none' && 
-					document.getElementById('messageArea').innerHTML !== 'Ход противника!'){
+					model.currentMove !== model.currentAI && !model.gameOver){
 					controller.playerMove(location);
 				}
 			});
@@ -274,15 +295,17 @@ function start (sym){ // старт игры
 	document.querySelector('#continueGameButton').style.display = 'block';
 	setGrid();
 	view.displayStat();
-	view.displayMessage('Ваш ход!')
 	if (sym === 'x'){
 		model.currentPlayer = 'x';
 		model.currentAI = 'o';
+		view.displayMessage('Ваш ход!');
+		model.currentMove = model.currentPlayer;
 	} else {
 		model.currentPlayer = 'o';
 		model.currentAI = 'x';
 		setTimeout(function(){controller.AIMove();}, 750);
 		view.displayMessage('Ход противника!');
+		model.currentMove = model.currentAI;
 	}
 };
 
@@ -293,6 +316,7 @@ function newGame(){ // создание новой игры
 	model.AIScore = 0;
 	model.currentPlayer = null;
 	model.currentAI = null;
+	model.currentMove = null;
 	document.querySelector('#window').style.display = 'block';
 	document.querySelector('#newGameButton').style.display = 'none';
 	document.querySelector('#continueGameButton').style.display = 'none';
@@ -331,7 +355,6 @@ function clearBoard(){ // очистка поля и статистики тек
 			for (var j = 0; j < model.boardSize; j++){
 				var col = j.toString();
 				var idBoard = row + col;
-				const location = idBoard;
 				document.getElementById(idBoard).classList.remove('x', 'o');
 			}
 		}
@@ -353,13 +376,14 @@ function continueGame(){ // начало новой партии текущей 
 		clearBoard();
 		if (model.currentPlayer === 'x'){
 			view.displayMessage('Ваш ход!');
+			model.currentMove = model.currentPlayer;
 		} else {
 			setTimeout(function(){controller.AIMove();}, 750);
 			view.displayMessage('Ход противника!');
+			model.currentMove = model.currentAI;
 		}
 	}
 }
-
 
 
 window.onload = init;
