@@ -310,6 +310,7 @@ function start (sym){ // старт игры
 };
 
 function newGame(){ // создание новой игры
+	setTimeout(function(){view.displayMessage('Крестики-нолики');}, 300);
 	clearBoard();
 	model.rounds = 0;
 	model.playerScore = 0;
@@ -320,7 +321,6 @@ function newGame(){ // создание новой игры
 	document.querySelector('#window').style.display = 'block';
 	document.querySelector('#newGameButton').style.display = 'none';
 	document.querySelector('#continueGameButton').style.display = 'none';
-	view.displayMessage('Крестики-нолики');
 	view.displayStat();
 }
 
