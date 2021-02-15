@@ -20,9 +20,9 @@ var view = { //визуальное представление
 	displaySym: function (location, sym){ //вывод ходов
 		document.getElementById(location).setAttribute('class', sym);
 		if (sym === 'x'){
-			xSound.play();
+			playSound(xSound);
 		} else {
-			oSound.play();
+			playSound(oSound);
 		}
 	},	
 
@@ -74,7 +74,7 @@ var model = { //модель игры
 			var winLine = this.cells[i];
 			if (winLine.hits.every(function (hit){return hit === model.currentPlayer;})){
 				view.displayMessage('Вы выиграли!');
-				winSound.play();
+				playSound(winSound);
 				this.playerScore++;
 				this.rounds++;
 				view.displayStat();
@@ -97,7 +97,7 @@ var model = { //модель игры
 			var winLine = this.cells[i];
 			if (winLine.hits.every(function (hit){return hit === model.currentAI;})){
 				view.displayMessage('Вы проиграли!');
-				failSound.play();
+				playSound(failSound);
 				this.AIScore++;
 				this.rounds++;
 				view.displayStat();
@@ -118,7 +118,7 @@ var model = { //модель игры
 			setTimeout(function(){nextPlayer();}, 750); // длительность передачи хода (по факту - время на ход компьютера)
 		} else if (!this.gameOver && this.moves == (this.boardSize * this.boardSize)) {
 			view.displayMessage('Ничья!');
-			gameOverSound.play();
+			playSound(gameOverSound);
 			this.rounds++;
 			view.displayStat();
 			this.gameOver = true;
@@ -224,28 +224,28 @@ function shuffle (arr){ // перемешивание позиций элеме�
 function init(){ //инициализация игры (стартового экрана)
 	document.getElementById('buttonX').onclick = function(){
 		start('x'); 
-		clickSound.play();
+		playSound(clickSound);
 	}; 
 	document.getElementById('buttonO').onclick = function(){
 		start('o'); 
-		clickSound.play();
+		playSound(clickSound);
 	};
 	document.getElementById('newGameButton').onclick = function(){
 		newGame(); 
-		clockSound.play();
+		playSound(clockSound);
 	}; 
 	document.getElementById('continueGameButton').onclick = function(){
 		continueGame(); 
-		clockSound.play();
+		playSound(clockSound);
 	};
 	document.getElementById('soundMode').onclick = function(){
 		changeVolume(); 
-		clockSound.play();
+		playSound(clockSound);
 	};
 	// document.querySelectorAll('.sounds').forEach(function(item){item.volume = 0});	
 	document.getElementById('colorMode').onclick = function(){
 		changeColorScheme(); 
-		clockSound.play();
+		playSound(clockSound);
 
 	};
 	view.displayStat();	
@@ -263,13 +263,11 @@ function changeColorScheme(){ // смена стиля экрана (светл�
 	}
 }
 
-function changeVolume(){ // смена режима фоновой музыки
+function changeVolume(){ // смена режима воспроизведения звука
 	if (document.getElementById('soundMode').classList.contains('sound')){
 		document.getElementById('soundMode').setAttribute('class', 'mute');
-		sounds.forEach(function(item){item.volume = 0});
 	} else {
 		document.getElementById('soundMode').setAttribute('class', 'sound');
-		sounds.forEach(function(item){item.volume = 1});
 	}
 }
 
@@ -386,35 +384,33 @@ function continueGame(){ // начало новой партии текущей 
 	}
 }
 
-var sounds = []; // коллекция звуков	
-
 var clickSound = new Audio('click.wav');
 clickSound.preload = 'auto';
-sounds.push(clickSound);
 
 var clockSound = new Audio('clock.wav');
 clockSound.preload = 'auto';
-sounds.push(clockSound);
 
 var xSound = new Audio('x.wav');
 xSound.preload = 'auto';
-sounds.push(xSound);
 
 var oSound = new Audio('o.wav');
 oSound.preload = 'auto';
-sounds.push(oSound);
 
 var winSound = new Audio('win.wav');
 winSound.preload = 'auto';
-sounds.push(winSound);
 
 var failSound = new Audio('fail.wav');
 failSound.preload = 'auto';
-sounds.push(failSound);
 
 var gameOverSound = new Audio('gameOver.wav');
 gameOverSound.preload = 'auto';
-sounds.push(gameOverSound);
 
+function playSound(sound){
+	if (document.getElementById('soundMode').classList.contains('sound')){
+		sound.play();
+	} else {
+		return false;
+	}
+}
 
 window.onload = init;
