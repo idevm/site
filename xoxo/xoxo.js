@@ -130,14 +130,14 @@ var model = { //модель игры
 	closedCells: [], // ячейки, в которых сделаны ходы: нужен для предотвращения повторного хода
 	
 	cells: [ //строки, столбцы и диагонали, в которых производятся действия
-		{name: 'row0', locations: ['00', '01', '02'], hits: ['', '', '',], toWinX: 0}, // locations - координаты
-		{name: 'row1', locations: ['10', '11', '12'], hits: ['', '', '',], toWinX: 0}, // ячеек по строкам, 
-		{name: 'row2', locations: ['20', '21', '22'], hits: ['', '', '',], toWinX: 0}, // столбцам и диагоналям; 
-		{name: 'col0', locations: ['00', '10', '20'], hits: ['', '', '',], toWinX: 0}, // hits - отмечать ячейки
-		{name: 'col1', locations: ['01', '11', '21'], hits: ['', '', '',], toWinX: 0}, // попаданий х и о;
-		{name: 'col2', locations: ['02', '12', '22'], hits: ['', '', '',], toWinX: 0}, // toWinX - ближе/дальше к
-		{name: 'dia1', locations: ['00', '11', '22'], hits: ['', '', '',], toWinX: 0}, // победе;
-		{name: 'dia2', locations: ['02', '11', '20'], hits: ['', '', '',], toWinX: 0}, // name - для вывода winLine
+		{name: 'row0', locations: ['00', '01', '02'], hits: ['', '', '',], toWinP: 0}, // locations - координаты
+		{name: 'row1', locations: ['10', '11', '12'], hits: ['', '', '',], toWinP: 0}, // ячеек по строкам, 
+		{name: 'row2', locations: ['20', '21', '22'], hits: ['', '', '',], toWinP: 0}, // столбцам и диагоналям; 
+		{name: 'col0', locations: ['00', '10', '20'], hits: ['', '', '',], toWinP: 0}, // hits - отмечать ячейки
+		{name: 'col1', locations: ['01', '11', '21'], hits: ['', '', '',], toWinP: 0}, // попаданий х и о;
+		{name: 'col2', locations: ['02', '12', '22'], hits: ['', '', '',], toWinP: 0}, // toWinP - ближе/дальше к
+		{name: 'dia1', locations: ['00', '11', '22'], hits: ['', '', '',], toWinP: 0}, // победе игрока;
+		{name: 'dia2', locations: ['02', '11', '20'], hits: ['', '', '',], toWinP: 0}, // name - для вывода winLine
 		]
 };
 
@@ -159,26 +159,26 @@ var controller = { //контроллер
 			col = Math.floor(Math.random() * model.boardSize);
 			location = row + '' + col;
 		} else { //определение позиции в соответствии с приоритетом
-			var winLineToWinO = model.cells.find(item => item.toWinX == 0 - 
+			var winLineToWinO = model.cells.find(item => item.toWinP == 0 - 
 				(model.boardSize - 1));
-			var winLineToWinX = model.cells.find(item => item.toWinX == 0 + 
+			var winLineToWinP = model.cells.find(item => item.toWinP == 0 + 
 				(model.boardSize - 1));
-			var winLineCloseToWinO = model.cells.find(item => item.toWinX == 0 - 
+			var winLineCloseToWinO = model.cells.find(item => item.toWinP == 0 - 
 				(model.boardSize - 2) && item.hits.includes(''));
-			var winLineCloseToWinX = model.cells.find(item => item.toWinX == 0 + 
+			var winLineCloseToWinP = model.cells.find(item => item.toWinP == 0 + 
 				(model.boardSize - 2) && item.hits.includes(''));			
 			if (winLineToWinO){
 	 			index = winLineToWinO.hits.indexOf('');
 				location = winLineToWinO.locations[index];
-			} else if (winLineToWinX){
-	 			index = winLineToWinX.hits.indexOf('');
-				location = winLineToWinX.locations[index];
+			} else if (winLineToWinP){
+	 			index = winLineToWinP.hits.indexOf('');
+				location = winLineToWinP.locations[index];
 			} else if (winLineCloseToWinO){
 	 			index = winLineCloseToWinO.hits.indexOf('');
 				location = winLineCloseToWinO.locations[index];
-			} else if (winLineCloseToWinX){
-	 			index = winLineCloseToWinX.hits.indexOf('');
-				location = winLineCloseToWinX.locations[index];
+			} else if (winLineCloseToWinP){
+	 			index = winLineCloseToWinP.hits.indexOf('');
+				location = winLineCloseToWinP.locations[index];
 			} else {
 				do {
 					row = Math.floor(Math.random() * model.boardSize);
@@ -331,14 +331,14 @@ function hit(location, sym){ //функция записи хода игрока
 		if (index >= 0){
 			winLine.hits[index] = sym;
 			if (sym === model.currentPlayer){
-				winLine.toWinX++; //чем больше, тем ближе к победе Х
+				winLine.toWinP++; //чем больше, тем ближе к победе
 				if (model.currentPlayer === 'x'){
 					view.displaySym(location, sym);
 				} else {
 					view.displaySym(location, sym);
 				}
 			} else {
-				winLine.toWinX--;
+				winLine.toWinP--;
 				if (model.currentAI === 'o'){
 					view.displaySym(location, sym);
 				} else {
@@ -364,7 +364,7 @@ function clearBoard(){ // очистка поля и статистики тек
 		model.closedCells = [];
 		for (var i = 0; i < model.cells.length; i++){
 			var winLine = model.cells[i];
-			winLine.toWinX = 0;
+			winLine.toWinP = 0;
 			for (var j = 0; j < model.boardSize; j++){
 				winLine.hits[j] = '';
 			}
