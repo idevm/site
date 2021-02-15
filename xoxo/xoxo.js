@@ -388,6 +388,22 @@ function continueGame(){ // начало новой партии текущей 
 
 var sounds = []; // коллекция звуков	
 
+var clickSound = new Audio('click.wav');
+clickSound.preload = 'auto';
+sounds.push(clickSound);
+
+var clockSound = new Audio('clock.wav');
+clockSound.preload = 'auto';
+sounds.push(clockSound);
+
+var xSound = new Audio('x.wav');
+xSound.preload = 'auto';
+sounds.push(xSound);
+
+var oSound = new Audio('o.wav');
+oSound.preload = 'auto';
+sounds.push(oSound);
+
 var winSound = new Audio('win.wav');
 winSound.preload = 'auto';
 sounds.push(winSound);
@@ -400,20 +416,5 @@ var gameOverSound = new Audio('gameOver.wav');
 gameOverSound.preload = 'auto';
 sounds.push(gameOverSound);
 
-var xSound = new Audio('x.wav');
-xSound.preload = 'auto';
-sounds.push(xSound);
-
-var oSound = new Audio('o.wav');
-oSound.preload = 'auto';
-sounds.push(oSound);
-
-var clickSound = new Audio('click.wav');
-clickSound.preload = 'auto';
-sounds.push(clickSound);
-
-var clockSound = new Audio('clock.wav');
-clockSound.preload = 'auto';
-sounds.push(clockSound);
 
 window.onload = init;
