@@ -34,6 +34,10 @@ var view = { //визуальное представление
 	removeLine: function (){ // стереть победную линию
 		document.getElementById('winLine').classList = [];
 		document.getElementById('winLine').style.display = 'none';		
+	},
+
+	displayStarScore: function (){
+		document.getElementById('starScore').innerHTML = model.starScore;
 	}
 };
 
@@ -66,6 +70,10 @@ var model = { //модель игры
 
 	currentMove: null, // текущий ход
 
+	currentStarLocation: null, // текущее положение звезды
+
+	starScore: 0,
+
 	playerTurn: function(location){ //ход игрока
 		hit(location, model.currentPlayer);
 		this.closedCells.push(location);
@@ -80,6 +88,11 @@ var model = { //модель игры
 				view.displayStat();
 				this.gameOver = true;
 				view.displayLine(winLine.name);
+				if (winLine.locations.indexOf(model.currentStarLocation) >= 0){
+					this.starScore++;
+					view.displayStarScore();
+					document.getElementById('star').src = 'winStar.png';
+				} 
 			}
 		}
 		if (!this.gameOver && this.moves < (this.boardSize * this.boardSize)){
@@ -103,6 +116,12 @@ var model = { //модель игры
 				view.displayStat();
 				this.gameOver = true;
 				view.displayLine(winLine.name);
+				if (winLine.locations.indexOf(model.currentStarLocation) >= 0){
+					if (this.starScore > 0){
+						this.starScore--;
+						view.displayStarScore();
+					}
+				} 
 			}
 		}
 		if (!this.gameOver && this.moves < (this.boardSize * this.boardSize)){
@@ -285,7 +304,8 @@ function setGrid(){ // генерация координат ячеек и ус�
 				}
 			});
 		}
-	} 	
+	}
+	setStar(); 	
 }
 
 function start (sym){ // старт игры
@@ -307,6 +327,22 @@ function start (sym){ // старт игры
 		model.currentMove = model.currentAI;
 	}
 };
+
+function setStar (){
+	var row = Math.floor(Math.random() * model.boardSize);
+	var col = Math.floor(Math.random() * model.boardSize);
+	var location = row + '' + col;
+	var star = document.createElement('img');
+	star.src = 'star.png';
+	star.id = 'star';
+	document.getElementById(location).append(star);
+	model.currentStarLocation = location;	
+}
+
+function removeStar(){
+	document.getElementById('star').remove();
+	model.currentStarLocation = null;
+}
 
 function newGame(){ // создание новой игры
 	setTimeout(function(){view.displayMessage('Крестики-нолики');}, 300);
@@ -367,12 +403,14 @@ function clearBoard(){ // очистка поля и статистики тек
 			for (var j = 0; j < model.boardSize; j++){
 				winLine.hits[j] = '';
 			}
-		}	
+		}
+		removeStar();	
 }
 
 function continueGame(){ // начало новой партии текущей игры
 	if (model.gameOver === true){
 		clearBoard();
+		setStar();
 		if (model.currentPlayer === 'x'){
 			view.displayMessage('Ваш ход!');
 			model.currentMove = model.currentPlayer;

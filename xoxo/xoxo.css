@@ -80,6 +80,20 @@
 		.o {
 			background: url(o.png) no-repeat center center;
 		}
+		#starScore {
+			position: absolute;
+			top:  716px;
+			left: calc(50% - 604px / 2 - 80px);
+			width: 48px;
+			height: 48px;
+			margin: auto;
+			text-align: center;
+			line-height: 48px;
+			font-weight: bold;
+			font-size: 24px;
+			font-family: Arial;
+			background: url(starScore.png) no-repeat center center;
+		}
 		#window {
 			display: block;
 			position: absolute;
