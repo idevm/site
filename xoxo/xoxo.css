@@ -18,7 +18,7 @@ body {
 	position: absolute;
 	width: 780px;
 	height: 1100px;
-	left: calc(50% - 780px/2 - 21.5px);
+	left: calc(50% - 780px/2);
 	top: 0px;
 }
 
@@ -28,12 +28,11 @@ body {
 	left: 18px;
 	right: 18px;
 	top: 59px;
-	font-size: 48px;
+	font-size: 50px;
 	line-height: 55px;
 	display: block;
 	align-items: center;
 	text-align: center;
-	margin: auto;
 	color: #1371C8;
 	font-family: 'myFont', Arial;
 }
@@ -44,7 +43,6 @@ width: 58px;
 height: 58px;
 left: calc(50% - 58px/2 + 343px);
 top: 40px;
-	margin: auto;
 	z-index: 2;
 }
 
@@ -62,7 +60,6 @@ width: 58px;
 height: 58px;
 left: calc(50% - 58px/2 - 343px);
 top: 40px;
-	margin: auto;
 	z-index: 2;
 }
 
@@ -80,7 +77,6 @@ width: 58px;
 height: 58px;
 left: calc(50% - 58px/2 - 343px);
 top: 727px;
-	margin: auto;
 	z-index: 2;
 	text-align: center;
 	line-height: 58px;
@@ -96,8 +92,7 @@ top: 727px;
 	height: 604px;
 	left: calc(50% - 604px/2);
 	top: 111px;
-	margin: auto;
-	background: url("board.png") no-repeat;
+	background: url("board.png") no-repeat center center;
 }
 
 #window {
@@ -109,7 +104,6 @@ top: 727px;
 	width: 500px;
 	border: solid #1371C8;
 	text-align: center;
-	margin: auto;
 	z-index: 2;
 	font-size: 50px;
 	font-family: Arial;
@@ -180,40 +174,39 @@ td {
 	top: 0px;
 	width: 604px;
 	height: 604px;
-	margin: auto;
 	display: none;			
 }
 
 .row0 {
-	background: url('winRow0.png') no-repeat;	
+	background: url('winRow0.png') no-repeat center center;	
 }
 
 .row1 {
-	background: url('winRow1.png') no-repeat;	
+	background: url('winRow1.png') no-repeat center center;	
 }
 
 .row2 {
-	background: url('winRow2.png') no-repeat;	
+	background: url('winRow2.png') no-repeat center center;	
 }
 
 .col0 {
-	background: url('winCol0.png') no-repeat;	
+	background: url('winCol0.png') no-repeat center center;	
 }
 
 .col1 {
-	background: url('winCol1.png') no-repeat;	
+	background: url('winCol1.png') no-repeat center center;	
 }
 
 .col2 {
-	background: url('winCol2.png') no-repeat;	
+	background: url('winCol2.png') no-repeat center center;	
 }
 
 .dia1 {
-	background: url('winDia1.png') no-repeat;	
+	background: url('winDia1.png') no-repeat center center;	
 }
 
 .dia2 {
-	background: url('winDia2.png') no-repeat;	
+	background: url('winDia2.png') no-repeat center center;	
 }
 
 #statArea {
@@ -222,13 +215,12 @@ td {
 	left: 18px;
 	right: 18px;
 	top: 717px;
-	font-size: 48px;
+	font-size: 50px;
 	line-height: 55px;
 	display: block;
 	align-items: center;
 	text-align: center;
 	color: #1371C8;
-	margin: auto;
 	font-family: 'myFont', Arial;
 }
 
@@ -245,7 +237,6 @@ td {
 	color: white;
 	font-size: 36px;
 	font-family: Arial;
-	vertical-align: middle;
 }
 
 #continueGameButton {
