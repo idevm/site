@@ -239,3 +239,25 @@
 			75%  {opacity: 75%;}
 			100% {opacity: 100%;}
 		}
+		.winStar {
+			opacity: 0%;
+			animation-name: fadeStar;
+			animation-duration: 1s;
+			animation-timing-function: linear;
+			animation-delay: 0s;
+			animation-iteration-count: 1;
+			animation-direction: normal;
+			animation-play-state: running;
+
+		    -webkit-transition: -webkit-transform 1s ease-out;
+	    	transition: transform 1s ease-out;
+	    	-webkit-transform: rotate(360deg) scale(1.5);
+	    	transform: rotate(360deg) scale(10);
+		}
+		@keyframes fadeStar {
+			0%   {opacity: 100%;}
+			25%  {opacity: 75%;}
+			50%  {opacity: 50%;}
+			75%  {opacity: 25%;}
+			100% {opacity: 0%;}
+		}

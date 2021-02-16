@@ -92,6 +92,7 @@ var model = { //модель игры
 					this.starScore++;
 					view.displayStarScore();
 					document.getElementById('star').src = 'winStar.png';
+					document.getElementById('star').setAttribute('class', 'winStar');					
 				} 
 			}
 		}
