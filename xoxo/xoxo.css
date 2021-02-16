@@ -75,6 +75,7 @@ table {
 td {
 	width: 200px;
 	height: 200px;
+	padding: 0px;
 }
 .x {
 	background: url(x.png) no-repeat center center;
