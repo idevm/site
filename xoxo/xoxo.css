@@ -2,102 +2,104 @@
 	font-family: 'myFont';
 	src: url('Capture_it-webfont.woff') format('woff');
 }
+
 body {
 }
+
 .darkBody {
 	background: #222222;
 }
+
 .lightBody {
 	background: white;
 }
-#soundMode {
+
+#field {
 	position: absolute;
-	top:  40px;
-	left: calc(50% - 604px / 2 - 80px);
-	width: 48px;
-	height: 48px;
+	width: 780px;
+	height: 1100px;
+	left: calc(50% - 780px/2 - 21.5px);
+	top: 0px;
+}
+
+#messageArea {
+	position: absolute;
+	height: 50px;
+	left: 18px;
+	right: 18px;
+	top: 59px;
+	font-size: 48px;
+	line-height: 55px;
+	display: block;
+	align-items: center;
+	text-align: center;
 	margin: auto;
-	z-index: 2;
+	color: #1371C8;
+	font-family: 'myFont', Arial;
 }
-.mute {
-	background: url(mute.png);
-}
-.sound {
-	background: url(sound.png);
-}
+
 #colorMode {
-	position: absolute;
-	top:  40px;
-	right: calc(50% - 604px / 2 - 80px);
-	width: 48px;
-	height: 48px;
+position: absolute;
+width: 58px;
+height: 58px;
+left: calc(50% - 58px/2 + 343px);
+top: 40px;
 	margin: auto;
 	z-index: 2;
 }
+
 .darkMode {
 	background: url(darkMode.png) no-repeat center center;
 }
+
 .lightMode {
 	background: url(lightMode.png) no-repeat center center;
 }
-#board {
-	position: relative;
-	width: 604px;
-	height: 604px;
+
+#soundMode {
+position: absolute;
+width: 58px;
+height: 58px;
+left: calc(50% - 58px/2 - 343px);
+top: 40px;
 	margin: auto;
-	background: url("board.png") no-repeat;
+	z-index: 2;
 }
-#messageArea {
-	position: relative;
-	margin: auto;
-	padding: 40px 0px 0px;
-	color: #1371C8;
-	text-align: center;
-	font-size: 50px;
-	font-family: 'myFont', Arial;
+
+.mute {
+	background: url(mute.png) no-repeat center center;
 }
-#statArea {
-	position: relative;
-	top: 605px;
-	margin: auto;
-	color: #1371C8;
-	text-align: center;
-	font-size: 50px;
-	font-family: 'myFont', Arial;
-	display: block;			
+
+.sound {
+	background: url(sound.png) no-repeat center center;
 }
-table {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	border-spacing: 0px;
-}
-td {
-	width: 200px;
-	height: 200px;
-	padding: 0px;
-}
-.x {
-	background: url(x.png) no-repeat center center;
-}
-.o {
-	background: url(o.png) no-repeat center center;
-}
+
 #starScore {
-	position: absolute;
-	top:  730px;
-	left: calc(50% - 604px / 2 - 80px);
-	width: 48px;
-	height: 48px;
+position: absolute;
+width: 58px;
+height: 58px;
+left: calc(50% - 58px/2 - 343px);
+top: 727px;
 	margin: auto;
 	z-index: 2;
 	text-align: center;
-	line-height: 48px;
+	line-height: 58px;
 	font-weight: bold;
 	font-size: 24px;
 	font-family: Arial;
 	background: url(starScore.png) no-repeat center center;
 }
+
+#board {
+	position: absolute;
+	width: 604px;
+	height: 604px;
+	left: calc(50% - 604px/2);
+	top: 111px;
+	margin: auto;
+	background: url("board.png") no-repeat;
+}
+
 #window {
 	display: block;
 	position: absolute;
@@ -113,45 +115,15 @@ td {
 	font-family: Arial;
 	border-radius: 10px;
 }
+
 .lightWindow {
 	background: #85C8DD;
 }
+
 .darkWindow {
 	background: radial-gradient(85.7% 85.7% at 50% 50%, #74D7F7 0%, #000000 100%);			
 }
-#winLine {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 604px;
-	height: 604px;
-	margin: auto;
-	display: none;			
-}
-.row0 {
-	background: url('winRow0.png') no-repeat;	
-}
-.row1 {
-	background: url('winRow1.png') no-repeat;	
-}
-.row2 {
-	background: url('winRow2.png') no-repeat;	
-}
-.col0 {
-	background: url('winCol0.png') no-repeat;	
-}
-.col1 {
-	background: url('winCol1.png') no-repeat;	
-}
-.col2 {
-	background: url('winCol2.png') no-repeat;	
-}
-.dia1 {
-	background: url('winDia1.png') no-repeat;	
-}
-.dia2 {
-	background: url('winDia2.png') no-repeat;	
-}
+
 #chooseSymbol {
 	position: absolute;
 	width: 417px;
@@ -162,6 +134,7 @@ td {
 	font-size: 36px;
 	font-family: Arial;			
 }
+
 #buttonX {
 	position: absolute;
 	width: 198px;
@@ -170,6 +143,7 @@ td {
 	top: 258px;
 	background: url('xButton.png');
 }
+
 #buttonO {
 	position: absolute;
 	width: 198px;
@@ -178,37 +152,117 @@ td {
 	top: 258px;
 	background: url('oButton.png');			
 }
+
+table {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	border-spacing: 0px;
+}
+
+td {
+	width: 200px;
+	height: 200px;
+	padding: 0px;
+}
+
+.x {
+	background: url(x.png) no-repeat center center;
+}
+
+.o {
+	background: url(o.png) no-repeat center center;
+}
+
+#winLine {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 604px;
+	height: 604px;
+	margin: auto;
+	display: none;			
+}
+
+.row0 {
+	background: url('winRow0.png') no-repeat;	
+}
+
+.row1 {
+	background: url('winRow1.png') no-repeat;	
+}
+
+.row2 {
+	background: url('winRow2.png') no-repeat;	
+}
+
+.col0 {
+	background: url('winCol0.png') no-repeat;	
+}
+
+.col1 {
+	background: url('winCol1.png') no-repeat;	
+}
+
+.col2 {
+	background: url('winCol2.png') no-repeat;	
+}
+
+.dia1 {
+	background: url('winDia1.png') no-repeat;	
+}
+
+.dia2 {
+	background: url('winDia2.png') no-repeat;	
+}
+
+#statArea {
+	position: absolute;
+	height: 130px;
+	left: 18px;
+	right: 18px;
+	top: 717px;
+	font-size: 48px;
+	line-height: 55px;
+	display: block;
+	align-items: center;
+	text-align: center;
+	color: #1371C8;
+	margin: auto;
+	font-family: 'myFont', Arial;
+}
+
 #newGameButton {
 	position: absolute;
-	top: 750px;
-	left: 0px;
+	width: 228px;
+	height: 148px;
+	left: calc(50% - 228px/2 - 152px);
+	top: 852px;
 	text-align: center;
 	line-height: 140px;
-	margin: 0px 20px;
 	display: none;
 	background: url('button.png') no-repeat center center;
-	width: 234px;
-	height: 148px;
 	color: white;
-	font-size: 30px;
+	font-size: 36px;
 	font-family: Arial;
 	vertical-align: middle;
 }
+
 #continueGameButton {
 	position: absolute;
-	top: 750px;
-	right: 0px;
+	width: 228px;
+	height: 148px;
+	left: calc(50% - 228px/2 + 151px);
+	top: 852px;
 	text-align: center;
 	line-height: 140px;
-	margin: 0px 20px;
 	display: none;
 	background: url('button.png') no-repeat center center;
-	width: 234px;
-	height: 148px;
 	color: white;
-	font-size: 30px;
+	font-size: 36px;
 	font-family: Arial;
 }
+
 #newGameButton, #continueGameButton, #window {
 	animation-name: showButtons;
 	animation-duration: 0.5s;
@@ -218,6 +272,7 @@ td {
 	animation-direction: normal;
 	animation-play-state: running;
 }
+
 @keyframes showButtons {
 	0%   {opacity: 0%;}
 	25%  {opacity: 25%;}
@@ -225,6 +280,7 @@ td {
 	75%  {opacity: 75%;}
 	100% {opacity: 100%;}
 }
+
 .winStar {
 	opacity: 0%;
 	animation-name: fadeStar;
@@ -237,6 +293,7 @@ td {
    	transition: transform 1s ease-out;
    	transform: rotate(360deg) scale(10);
 }
+
 .failStar {
 	opacity: 0%;
 	animation-name: fadeStar;
@@ -249,6 +306,7 @@ td {
    	transition: transform 1s ease-out;
    	transform: scale(5);
 }
+
 @keyframes fadeStar {
 	0%   {opacity: 100%;}
 	25%  {opacity: 75%;}
