@@ -36,7 +36,7 @@ var view = { //визуальное представление
 		document.getElementById('winLine').style.display = 'none';		
 	},
 
-	displayStarScore: function (){
+	displayStarScore: function (){ // показ количества звезд
 		document.getElementById('starScore').innerHTML = model.starScore;
 	}
 };
@@ -72,7 +72,7 @@ var model = { //модель игры
 
 	currentStarLocation: null, // текущее положение звезды
 
-	starScore: 0,
+	starScore: 0, // количество звезд игрока
 
 	playerTurn: function(location){ //ход игрока
 		hit(location, model.currentPlayer);
@@ -122,6 +122,8 @@ var model = { //модель игры
 						this.starScore--;
 						view.displayStarScore();
 					}
+					document.getElementById('star').src = 'failStar.png';
+					document.getElementById('star').setAttribute('class', 'failStar');
 				} 
 			}
 		}
@@ -329,7 +331,7 @@ function start (sym){ // старт игры
 	}
 };
 
-function setStar (){
+function setStar (){ // размещение звезды на поле
 	var row = Math.floor(Math.random() * model.boardSize);
 	var col = Math.floor(Math.random() * model.boardSize);
 	var location = row + '' + col;
@@ -340,7 +342,7 @@ function setStar (){
 	model.currentStarLocation = location;	
 }
 
-function removeStar(){
+function removeStar(){ // убрать звезду с поля
 	document.getElementById('star').remove();
 	model.currentStarLocation = null;
 }
@@ -444,7 +446,7 @@ failSound.preload = 'auto';
 var gameOverSound = new Audio('gameOver.wav');
 gameOverSound.preload = 'auto';
 
-function playSound(sound){
+function playSound(sound){ // воспроизведение звука в зависимости от режима громкости
 	if (document.getElementById('soundMode').classList.contains('sound')){
 		sound.play();
 	} else {
