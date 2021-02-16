@@ -12,8 +12,8 @@ var view = { //визуальное представление
 	},
 
 	displayStat: function (){ //вывод счета и количества сыгранных партий
-		document.getElementById('statArea').innerHTML = 'Счет ' + model.playerScore + ' : ' 
-			+ model.AIScore + '<br>' + 'Сыграно партий: ' + model.rounds;
+		document.getElementById('statArea').innerHTML = 'Счет ' + model.playerScore + 
+		' : ' + model.AIScore + '<br>' + 'Сыграно партий: ' + model.rounds;
 	},
 	
 	displaySym: function (location, sym){ //вывод ходов
@@ -42,7 +42,7 @@ var view = { //визуальное представление
 
 function show (msg){ // анимация строки сообщения
 	var letters = msg.split('');
-	var liveStr = ''
+	var liveStr = '';
 	for (let i = 0; i < letters.length; i++){
    		setTimeout(function(){
    			liveStr += letters[i];
@@ -195,7 +195,7 @@ var controller = { //контроллер
 			var winLineCloseToWinP = model.cells.find(item => item.toWinP == 0 + 
 				(model.boardSize - 2) && item.hits.includes(''));			
 			if (winLineToWinAI){
-	 			index = winLineToWinAI.hits.indexOf('');
+	 			var index = winLineToWinAI.hits.indexOf('');
 				location = winLineToWinAI.locations[index];
 			} else if (winLineToWinP){
 	 			index = winLineToWinP.hits.indexOf('');
@@ -334,7 +334,7 @@ function start (sym){ // старт игры
 		view.displayMessage('Ход противника!');
 		model.currentMove = model.currentAI;
 	}
-};
+}
 
 function setStar (){ // размещение звезды на поле
 	var row = Math.floor(Math.random() * model.boardSize);
