@@ -224,7 +224,7 @@ td {
 	font-family: 'myFont', Arial;
 }
 
-#newGameButton {
+#endGameButton {
 	position: absolute;
 	width: 228px;
 	height: 148px;
@@ -254,7 +254,7 @@ td {
 	font-family: Arial;
 }
 
-#newGameButton, #continueGameButton, #window {
+#endGameButton, #continueGameButton, #window {
 	animation-name: showButtons;
 	animation-duration: 0.5s;
 	animation-timing-function: linear;
