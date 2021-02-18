@@ -73,6 +73,8 @@ var model = { //модель и состояние игры
 
 	freeCells: [], // свободные ячейки, в которые можно делать ход
 	
+	difficult: 1, // сложность (0 - легкая, 1 - нормальная)
+
 	cells: [	
 		{name: 'row0', locations: ['00', '01', '02'], hits: ['', '', '',], toWinP: 0}, 
 		{name: 'row1', locations: ['10', '11', '12'], hits: ['', '', '',], toWinP: 0}, 
@@ -211,13 +213,13 @@ var controller = { //контроллер
 				(model.boardSize - 2) && item.hits.includes(''));
 			let winLineCloseToWinP = model.cells.find(item => item.toWinP === 0 + 
 				(model.boardSize - 2) && item.hits.includes(''));			
-			if (winLineToWinAI){
+			if (winLineToWinAI && model.difficult >= 0){
 				location = winLineToWinAI.locations[winLineToWinAI.hits.indexOf('')];
-			} else if (winLineToWinP){
+			} else if (winLineToWinP && model.difficult > 0){
 				location = winLineToWinP.locations[winLineToWinP.hits.indexOf('')];
-			} else if (winLineCloseToWinAI){
+			} else if (winLineCloseToWinAI && model.difficult >= 0){
 				location = winLineCloseToWinAI.locations[winLineCloseToWinAI.hits.indexOf('')];
-			} else if (winLineCloseToWinP){
+			} else if (winLineCloseToWinP && model.difficult > 0){
 				location = winLineCloseToWinP.locations[winLineCloseToWinP.hits.indexOf('')];
 			} else {
 				location = randomLocation();
