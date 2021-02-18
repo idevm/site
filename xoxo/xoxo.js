@@ -467,7 +467,7 @@ function changeColorScheme(){ // смена стиля экрана (светл�
 
 function changeDifficult(){ // смена сложности
 	if (document.getElementById('difMode').classList.contains('normal') && 
-		confirm('Изменить уровень сложности на "легкий"? Текущая игра будет завершена')){
+		confirm('Установить уровень сложности "ЛЕГКИЙ"? Текущая игра будет завершена.')){
 		document.querySelector('#window').style.display === 'none' ? endGame() : false;
 		document.getElementById('difMode').setAttribute('class', 'easy');
 		model.difficult = 0;
@@ -476,7 +476,7 @@ function changeDifficult(){ // смена сложности
 			view.displayMessage(model.currentMessage);
 		}, 1500);
 	} else if (document.getElementById('difMode').classList.contains('easy') &&
-		confirm('Изменить уровень сложности на "нормальный"? Текущая игра будет завершена')){
+		confirm('Установить уровень сложности "НОРМАЛЬНЫЙ"? Текущая игра будет завершена.')){
 		document.querySelector('#window').style.display === 'none' ? endGame() : false;
 		document.getElementById('difMode').setAttribute('class', 'normal');
 		view.displayMessage('Сложность: норм');	
