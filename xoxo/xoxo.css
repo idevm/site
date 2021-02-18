@@ -86,6 +86,28 @@ top: 727px;
 	background: url(starScore.png) no-repeat center center;
 }
 
+#difMode {
+	position: absolute;
+	width: 58px;
+	height: 58px;
+	left: calc(50% - 58px/2 + 343px);
+	top: 727px;
+	z-index: 2;
+	text-align: center;
+	line-height: 58px;
+	font-weight: bold;
+	font-size: 50px;
+	font-family: Arial;
+}
+
+.normal {
+	background: url(difNorm.png) no-repeat center center;
+}
+
+.easy {
+	background: url(difEasy.png) no-repeat center center;
+}
+
 #board {
 	position: absolute;
 	width: 604px;

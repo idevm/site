@@ -33,6 +33,10 @@ var view = { //визуальное представление
 
 	displayStarScore: function (){ // показ количества звезд
 		document.getElementById('starScore').innerHTML = model.starScore;
+	},
+	displayCurrentPlayer: function (){ // символ игрока в кнопке режима сложности
+		let sign = model.currentPlayer;
+		document.getElementById('difMode').innerHTML = sign.toUpperCase();
 	}
 };
 
@@ -69,6 +73,8 @@ var model = { //модель и состояние игры
 
 	currentStarLocation: null, // текущее положение звезды
 
+	currentMessage: 'Крестики-нолики',
+
 	starScore: 0, // количество звезд игрока
 
 	freeCells: [], // свободные ячейки, в которые можно делать ход
@@ -99,7 +105,8 @@ var model = { //модель и состояние игры
 		for (let i = 0; i < this.boardSize * 2 + 2; i++){//проверка на комбинацию из трех Х
 			let winLine = this.cells[i];
 			if (winLine.hits.every(function (hit){return hit === model.currentPlayer;})){
-				view.displayMessage('Вы выиграли!');
+				model.currentMessage = 'Вы выиграли!';
+				view.displayMessage(model.currentMessage);
 				playSound(winSound);
 				this.playerScore++;
 				this.rounds++;
@@ -115,7 +122,8 @@ var model = { //модель и состояние игры
 			}
 		}
 		if (!this.gameOver && this.moves < this.boardSize * this.boardSize){
-			view.displayMessage('Ход противника!');
+			model.currentMessage = 'Ход противника!';
+			view.displayMessage(model.currentMessage);
 			this.currentMove = this.currentAI;
 		}
 		this.nextTurn(controller.AIMove);
@@ -129,7 +137,8 @@ var model = { //модель и состояние игры
 		for (let i = 0; i < this.boardSize * 2 + 2; i++){//проверка на комбинацию из трех О
 			let winLine = this.cells[i];
 			if (winLine.hits.every(function (hit){return hit === model.currentAI;})){
-				view.displayMessage('Вы проиграли!');
+				model.currentMessage = 'Вы проиграли!';
+				view.displayMessage(model.currentMessage);
 				playSound(failSound);
 				this.AIScore++;
 				this.rounds++;
@@ -147,7 +156,8 @@ var model = { //модель и состояние игры
 			}
 		}
 		if (!this.gameOver && this.moves < this.boardSize * this.boardSize){
-			view.displayMessage('Ваш ход!');
+			model.currentMessage = 'Ваш ход!';
+			view.displayMessage(model.currentMessage);
 			this.currentMove = this.currentPlayer;
 		}
 		this.nextTurn(controller.playerMove);
@@ -160,7 +170,8 @@ var model = { //модель и состояние игры
 				nextPlayer();
 			}, 750); 
 		} else if (!this.gameOver && this.moves === this.boardSize * this.boardSize) {
-			view.displayMessage('Ничья!');
+			model.currentMessage = 'Ничья!';
+			view.displayMessage(model.currentMessage);
 			playSound(gameOverSound);
 			this.rounds++;
 			view.displayStat();
@@ -237,8 +248,8 @@ function parseMove(location){ //валидатор хода игрока
 	} else {
 		view.displayMessage('Ячейка занята!');
 		setTimeout(function(){
-			view.displayMessage('Ваш ход!');
-		}, 1000);
+			view.displayMessage(model.currentMessage);
+		}, 1500);
 	}
 }
 
@@ -250,35 +261,46 @@ function parseAIMove(location){ //валидатор хода компьютер
 	}  
 }
 
-function randomLocation(){
+function randomLocation(){ // генератор случайной позиции
 	let location = model.freeCells[Math.floor(Math.random() * model.freeCells.length)];
 	return location;
 }
 
 function init(){ //инициализация игры (стартового экрана)
 	document.getElementById('buttonX').onclick = function(){
-		start('x'); 
 		playSound(clickSound);
+		start('x'); 
 	}; 
 	document.getElementById('buttonO').onclick = function(){
-		start('o'); 
 		playSound(clickSound);
+		start('o'); 
 	};
 	document.getElementById('endGameButton').onclick = function(){
-		endGame(); 
 		playSound(clockSound);
+		endGame(); 
 	}; 
 	document.getElementById('continueGameButton').onclick = function(){
-		continueGame(); 
 		playSound(clockSound);
+		continueGame(); 
 	};
 	document.getElementById('soundMode').onclick = function(){
-		changeSound(); 
 		playSound(clockSound);
+		changeSound(); 
 	};	
 	document.getElementById('colorMode').onclick = function(){
-		changeColorScheme(); 
 		playSound(clockSound);
+		changeColorScheme(); 
+	};
+	document.getElementById('starScore').onclick = function(){
+		playSound(clockSound);
+		view.displayMessage('Всего звезд: ' + model.starScore);	
+		setTimeout(function(){
+			view.displayMessage(model.currentMessage);
+		}, 1500);
+	};
+	document.getElementById('difMode').onclick = function(){
+		playSound(clockSound);
+		changeDifficult(); 
 	};
 	view.displayStat();	
 }
@@ -294,16 +316,20 @@ function start (sym){ // старт игры
 	if (sym === 'x'){
 		model.currentPlayer = 'x';
 		model.currentAI = 'o';
-		view.displayMessage('Ваш ход!');
+		model.currentMessage = 'Ваш ход!';
+		view.displayMessage(model.currentMessage);
 		model.currentMove = model.currentPlayer;
+		view.displayCurrentPlayer();
 	} else {
 		model.currentPlayer = 'o';
 		model.currentAI = 'x';
 		setTimeout(function(){
 			controller.AIMove();
 		}, 750);
-		view.displayMessage('Ход противника!');
+		model.currentMessage = 'Ход противника!';
+		view.displayMessage(model.currentMessage);
 		model.currentMove = model.currentAI;
+		view.displayCurrentPlayer();
 	}
 }
 
@@ -339,9 +365,8 @@ function setStar (location){ // размещение звезды на поле
 }
 
 function endGame(){ // создание новой игры
-	setTimeout(function(){
-		view.displayMessage('Крестики-нолики');
-	}, 300);
+	model.currentMessage = 'Крестики-нолики';
+	view.displayMessage(model.currentMessage);
 	clearBoard();
 	model.rounds = 0;
 	model.playerScore = 0;
@@ -387,13 +412,15 @@ function continueGame(){ // начало новой партии текущей 
 		setFreeCells();
 		setStar(randomLocation());
 		if (model.currentPlayer === 'x'){
-			view.displayMessage('Ваш ход!');
+			model.currentMessage = 'Ваш ход!';
+			view.displayMessage(model.currentMessage);
 			model.currentMove = model.currentPlayer;
 		} else {
 			setTimeout(function(){
 				controller.AIMove();
 			}, 750);
-			view.displayMessage('Ход противника!');
+			model.currentMessage = 'Ход противника!';
+			view.displayMessage(model.currentMessage);
 			model.currentMove = model.currentAI;
 		}
 	}
@@ -402,8 +429,16 @@ function continueGame(){ // начало новой партии текущей 
 function changeSound(){ // смена беззвучного режима
 	if (document.getElementById('soundMode').classList.contains('sound')){
 		document.getElementById('soundMode').setAttribute('class', 'mute');
+		view.displayMessage('Режим: без звука');	
+		setTimeout(function(){
+			view.displayMessage(model.currentMessage);
+		}, 1500);
 	} else {
 		document.getElementById('soundMode').setAttribute('class', 'sound');
+		view.displayMessage('Режим: со звуком');	
+		setTimeout(function(){
+			view.displayMessage(model.currentMessage);
+		}, 1500);
 	}
 }
 
@@ -412,10 +447,40 @@ function changeColorScheme(){ // смена стиля экрана (светл�
 		document.getElementById('colorMode').setAttribute('class', 'darkMode');
 		document.body.setAttribute('class', 'darkBody');
 		document.getElementById('window').setAttribute('class', 'darkWindow');
+		view.displayMessage('Тема: темная');	
+		setTimeout(function(){
+			view.displayMessage(model.currentMessage);
+		}, 1500);
 	} else {
 		document.getElementById('colorMode').setAttribute('class', 'lightMode');
 		document.body.setAttribute('class', 'lightBody');
 		document.getElementById('window').setAttribute('class', 'lightWindow');
+		view.displayMessage('Тема: светлая');	
+		setTimeout(function(){
+			view.displayMessage(model.currentMessage);
+		}, 1500);
+	}
+}
+
+function changeDifficult(){ // смена сложности
+	if (document.getElementById('difMode').classList.contains('normal') && 
+		confirm('Изменить уровень сложности на "легкий"?')){
+		document.getElementById('difMode').setAttribute('class', 'easy');
+		endGame();	
+		model.difficult = 0;
+		view.displayMessage('Сложность: легкая');
+		setTimeout(function(){
+			view.displayMessage(model.currentMessage);
+		}, 1500);
+	} else if (document.getElementById('difMode').classList.contains('easy') &&
+		confirm('Изменить уровень сложности на "нормальный"?')){
+		document.getElementById('difMode').setAttribute('class', 'normal');
+		endGame();
+		view.displayMessage('Сложность: норм');	
+		model.difficult = 1;
+		setTimeout(function(){
+			view.displayMessage(model.currentMessage);
+		}, 1500);
 	}
 }
 
