@@ -22,17 +22,16 @@ body {
 	height: 1100px;
 	left: calc(50% - 780px/2);
 	top: 0px;
-	background: rgba(32, 134, 230, 0.8);
-	backdrop-filter: blur(15px);
+	background: rgba(32, 134, 230);
 	border-radius: 10px;
 }
 
 #header {
 	position: absolute;
-width: 744px;
-height: 110px;
-left: calc(50% - 744px/2);
-top: 93px;
+	width: 744px;
+	height: 110px;
+	left: calc(50% - 744px/2);
+	top: 93px;
 	font-family: 'myFont', Arial;
 	font-size: 64px;
 	line-height: 74px;
