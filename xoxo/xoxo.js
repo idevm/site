@@ -267,6 +267,9 @@ function randomLocation(){ // генератор случайной позици
 }
 
 function init(){ //инициализация игры (стартового экрана)
+	setTimeout(function(){
+		document.getElementById('loadScreen').style.display = 'none';
+	}, 3000);
 	document.getElementById('buttonX').onclick = function(){
 		playSound(clickSound);
 		start('x'); 
