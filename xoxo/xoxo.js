@@ -47,7 +47,7 @@ function show (msg){ // анимация строки сообщения
    		setTimeout(function(){
    			liveStr += letters[i];
 			document.getElementById('messageArea').innerHTML = liveStr;
-		}, i*20);
+		}, (i+1)*20);
    }
 }
 
