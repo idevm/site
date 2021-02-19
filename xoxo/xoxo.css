@@ -157,17 +157,18 @@ top: 727px;
 	z-index: 2;
 	text-align: center;
 	line-height: 58px;
-	font-weight: bold;
+	font-weight: bolder;
 	font-size: 50px;
 	font-family: Arial;
+	background: url(difficult.png) no-repeat center center;
 }
 
 .normal {
-	background: url(difNorm.png) no-repeat center center;
+	color: #CCAC05;
 }
 
 .easy {
-	background: url(difEasy.png) no-repeat center center;
+	color: #42A61F;
 }
 
 #board {

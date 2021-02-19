@@ -359,11 +359,15 @@ function setFreeCells(){ // генерация координат свободн
 }
 
 function setStar (location){ // размещение звезды на поле
-	let star = document.createElement('img');
-	star.src = 'star.png';
-	star.id = 'star';
-	document.getElementById(location).append(star);
-	model.currentStarLocation = location;	
+	if (model.difficult > 0){
+		let star = document.createElement('img');
+		star.src = 'star.png';
+		star.id = 'star';
+		document.getElementById(location).append(star);
+		model.currentStarLocation = location;			
+	} else {
+		return false;
+	}
 }
 
 function endGame(){ // завершение игры и выход на стартовый экран
@@ -404,8 +408,12 @@ function clearBoard(){ // очистка поля и статистики тек
 }
 
 function removeStar(){ // убрать звезду с поля
-	document.getElementById('star').remove();
-	model.currentStarLocation = null;
+	if (model.difficult > 0) {
+		document.getElementById('star').remove();
+		model.currentStarLocation = null;		
+	} else {
+		return false;
+	}
 }
 
 function continueGame(){ // начало новой партии текущей игры
