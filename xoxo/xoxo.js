@@ -73,7 +73,7 @@ var model = { //модель и состояние игры
 
 	currentStarLocation: null, // текущее положение звезды
 
-	currentMessage: 'Крестики-нолики',
+	currentMessage: 'Крестики-нолики', // текущее сообщение в строке сообщений
 
 	starScore: 0, // количество звезд игрока
 
@@ -102,25 +102,7 @@ var model = { //модель и состояние игры
 		let index = this.freeCells.indexOf(location);
 		this.freeCells.splice(index, 1);
 		this.moves++;
-		for (let i = 0; i < this.boardSize * 2 + 2; i++){//проверка на комбинацию из трех Х
-			let winLine = this.cells[i];
-			if (winLine.hits.every(function (hit){return hit === model.currentPlayer;})){
-				model.currentMessage = 'Вы выиграли!';
-				view.displayMessage(model.currentMessage);
-				playSound(winSound);
-				this.playerScore++;
-				this.rounds++;
-				view.displayStat();
-				this.gameOver = true;
-				view.displayLine(winLine.name);
-				if (winLine.locations.indexOf(model.currentStarLocation) >= 0){
-					this.starScore++;
-					view.displayStarScore();
-					document.getElementById('star').src = 'winStar.png';
-					document.getElementById('star').setAttribute('class', 'winStar');	
-				} 
-			}
-		}
+		model.cells.forEach(isGameEnd);
 		if (!this.gameOver && this.moves < this.boardSize * this.boardSize){
 			model.currentMessage = 'Ход противника!';
 			view.displayMessage(model.currentMessage);
@@ -134,27 +116,7 @@ var model = { //модель и состояние игры
 		let index = this.freeCells.indexOf(location);
 		this.freeCells.splice(index, 1);
 		this.moves++;
-		for (let i = 0; i < this.boardSize * 2 + 2; i++){//проверка на комбинацию из трех О
-			let winLine = this.cells[i];
-			if (winLine.hits.every(function (hit){return hit === model.currentAI;})){
-				model.currentMessage = 'Вы проиграли!';
-				view.displayMessage(model.currentMessage);
-				playSound(failSound);
-				this.AIScore++;
-				this.rounds++;
-				view.displayStat();
-				this.gameOver = true;
-				view.displayLine(winLine.name);
-				if (winLine.locations.indexOf(model.currentStarLocation) >= 0){
-					if (this.starScore > 0){
-						this.starScore--;
-						view.displayStarScore();
-					}
-					document.getElementById('star').src = 'failStar.png';
-					document.getElementById('star').setAttribute('class', 'failStar');
-				} 
-			}
-		}
+		model.cells.forEach(isGameEnd);
 		if (!this.gameOver && this.moves < this.boardSize * this.boardSize){
 			model.currentMessage = 'Ваш ход!';
 			view.displayMessage(model.currentMessage);
@@ -183,14 +145,52 @@ var model = { //модель и состояние игры
 };
 
 function hit(location, sym){ //функция записи хода игрока в соответствующую ячейку
-	for (let i = 0; i < model.boardSize * 2 + 2; i++){ //поиск и отметка хода в нужных cells.hits
-		let winLine = model.cells[i];
-		let index = winLine.locations.indexOf(location);
+	function a (item){
+		let index = item.locations.indexOf(location);
 		if (index >= 0){
-			winLine.hits[index] = sym;
+			item.hits[index] = sym;
 			view.displaySym(location, sym);
-			sym === model.currentPlayer ? winLine.toWinP++ : winLine.toWinP--;
+			sym === model.currentPlayer ? item.toWinP++ : item.toWinP--;
 		}
+	}
+	model.cells.forEach(a);
+}
+
+function isGameEnd (item){ // проверка окончена ли игра
+	if (item.hits.every(function (hit){return hit === model.currentPlayer;})){
+		model.currentMessage = 'Вы выиграли!';
+		view.displayMessage(model.currentMessage);
+		playSound(winSound);
+		model.playerScore++;
+		model.rounds++;
+		view.displayStat();
+		model.gameOver = true;
+		view.displayLine(item.name);
+		if (item.locations.indexOf(model.currentStarLocation) >= 0){
+			model.starScore++;
+			view.displayStarScore();
+			document.getElementById('star').src = 'winStar.png';
+			document.getElementById('star').setAttribute('class', 'winStar');	
+		} 
+	} else {
+		if (item.hits.every(function (hit){return hit === model.currentAI;})){
+			model.currentMessage = 'Вы проиграли!';
+			view.displayMessage(model.currentMessage);
+			playSound(failSound);
+			model.AIScore++;
+			model.rounds++;
+			view.displayStat();
+			model.gameOver = true;
+			view.displayLine(item.name);
+			if (item.locations.indexOf(model.currentStarLocation) >= 0){
+				if (model.starScore > 0){
+					model.starScore--;
+					view.displayStarScore();
+				}
+				document.getElementById('star').src = 'failStar.png';
+				document.getElementById('star').setAttribute('class', 'failStar');
+			} 
+		}		
 	}
 }
 
@@ -320,9 +320,7 @@ function start (sym){ // старт игры
 		model.currentPlayer = 'x';
 		model.currentAI = 'o';
 		model.currentMessage = 'Ваш ход!';
-		view.displayMessage(model.currentMessage);
 		model.currentMove = model.currentPlayer;
-		view.displayCurrentPlayer();
 	} else {
 		model.currentPlayer = 'o';
 		model.currentAI = 'x';
@@ -330,10 +328,10 @@ function start (sym){ // старт игры
 			controller.AIMove();
 		}, 750);
 		model.currentMessage = 'Ход противника!';
-		view.displayMessage(model.currentMessage);
 		model.currentMove = model.currentAI;
-		view.displayCurrentPlayer();
 	}
+	view.displayMessage(model.currentMessage);
+	view.displayCurrentPlayer();
 }
 
 function setGrid(){ // генерация координат ячеек и установка слушателя для кликов игрока
@@ -367,7 +365,7 @@ function setStar (location){ // размещение звезды на поле
 	model.currentStarLocation = location;	
 }
 
-function endGame(){ // создание новой игры
+function endGame(){ // завершение игры и выход на стартовый экран
 	model.currentMessage = 'Крестики-нолики';
 	view.displayMessage(model.currentMessage);
 	clearBoard();
@@ -508,7 +506,7 @@ failSound.preload = 'auto';
 var gameOverSound = new Audio('gameOver.wav');
 gameOverSound.preload = 'auto';
 
-function playSound(sound){ // воспроизведение звука в зависимости от режима громкости
+function playSound(sound){ // воспроизведение звука в зависимости от режима звука
 	document.getElementById('soundMode').classList.contains('sound') ? sound.play() : false;
 }
 
