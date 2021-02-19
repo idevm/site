@@ -228,12 +228,10 @@ var controller = { //контроллер
 			if (winLineToWinAI && model.difficult >= 0){
 				location = winLineToWinAI.locations[winLineToWinAI.hits.indexOf('')];
 			} else if (winLineToWinP && model.difficult >= 0){
-				if (model.difficult === 0 && (Math.floor(Math.random() * 2) === 1)){
-					location = winLineToWinP.locations[winLineToWinP.hits.indexOf('')]; console.log('gen!');
-				} else if (model.difficult === 1) {
-					location = winLineToWinP.locations[winLineToWinP.hits.indexOf('')]; console.log('dif===1');
-				} else {
-					location = randomLocation(); console.log('rndmMove')					
+				if (model.difficult === 0 && (Math.floor(Math.random() * 2) === 0)){
+					location = randomLocation();	console.log('gen!');				
+				} else  {
+					location = winLineToWinP.locations[winLineToWinP.hits.indexOf('')]; 
 				}
 			} else if (winLineCloseToWinAI && model.difficult > 0){
 				location = winLineCloseToWinAI.locations[winLineCloseToWinAI.hits.indexOf('')];
@@ -310,8 +308,17 @@ function init(){ //инициализация игры (стартового э�
 	};
 	document.getElementById('difMode').onclick = function(){
 		playSound(clockSound);
-		changeDifficult(); 
+		openDifficultWindow(); 
 	};
+	document.getElementById('easyButton').onclick = function(){
+		playSound(clockSound);
+		setEasy(); 
+	};
+	document.getElementById('normalButton').onclick = function(){
+		playSound(clockSound);
+		setNorm(); 
+	};
+
 	view.displayStat();	
 }
 
@@ -478,25 +485,45 @@ function changeColorScheme(){ // смена стиля экрана (светл�
 	}
 }
 
-function changeDifficult(){ // смена сложности
-	if (document.getElementById('difMode').classList.contains('normal') && 
-		confirm('Установить уровень сложности "ЛЕГКИЙ"? Текущая игра будет завершена.')){
+function openDifficultWindow(){
+	if (document.getElementById('difWindow').style.display === 'none'){
+		document.getElementById('difWindow').style.display = 'block';
+	} else {
+		document.getElementById('difWindow').style.display = 'none';		
+	}
+}
+
+function setEasy(){
+if (document.getElementById('difMode').classList.contains('normal')){
 		document.querySelector('#window').style.display === 'none' ? endGame() : false;
 		document.getElementById('difMode').setAttribute('class', 'easy');
+		document.getElementById('easyButton').setAttribute('class', 'selEasyBut');
+		document.getElementById('normalButton').setAttribute('class', 'unselNormBut');						
 		model.difficult = 0;
 		view.displayMessage('Сложность: легкая');
 		setTimeout(function(){
 			view.displayMessage(model.currentMessage);
 		}, 1500);
-	} else if (document.getElementById('difMode').classList.contains('easy') &&
-		confirm('Установить уровень сложности "НОРМАЛЬНЫЙ"? Текущая игра будет завершена.')){
+		document.getElementById('difWindow').style.display = 'none';
+	} else {
+		document.getElementById('difWindow').style.display = 'none';
+	}
+}
+
+function setNorm(){
+if (document.getElementById('difMode').classList.contains('easy')){
 		document.querySelector('#window').style.display === 'none' ? endGame() : false;
 		document.getElementById('difMode').setAttribute('class', 'normal');
+		document.getElementById('normalButton').setAttribute('class', 'selNormBut');
+		document.getElementById('easyButton').setAttribute('class', 'unselEasyBut');				
 		view.displayMessage('Сложность: норм');	
 		model.difficult = 1;
 		setTimeout(function(){
 			view.displayMessage(model.currentMessage);
 		}, 1500);
+		document.getElementById('difWindow').style.display = 'none';		
+	} else {
+		document.getElementById('difWindow').style.display = 'none';
 	}
 }
 
