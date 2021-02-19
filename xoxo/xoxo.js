@@ -227,9 +227,15 @@ var controller = { //контроллер
 				(model.boardSize - 2) && item.hits.includes(''));			
 			if (winLineToWinAI && model.difficult >= 0){
 				location = winLineToWinAI.locations[winLineToWinAI.hits.indexOf('')];
-			} else if (winLineToWinP && model.difficult > 0){
-				location = winLineToWinP.locations[winLineToWinP.hits.indexOf('')];
-			} else if (winLineCloseToWinAI && model.difficult >= 0){
+			} else if (winLineToWinP && model.difficult >= 0){
+				if (model.difficult === 0 && (Math.floor(Math.random() * 2) === 1)){
+					location = winLineToWinP.locations[winLineToWinP.hits.indexOf('')]; console.log('gen!');
+				} else if (model.difficult === 1) {
+					location = winLineToWinP.locations[winLineToWinP.hits.indexOf('')]; console.log('dif===1');
+				} else {
+					location = randomLocation(); console.log('rndmMove')					
+				}
+			} else if (winLineCloseToWinAI && model.difficult > 0){
 				location = winLineCloseToWinAI.locations[winLineCloseToWinAI.hits.indexOf('')];
 			} else if (winLineCloseToWinP && model.difficult > 0){
 				location = winLineCloseToWinP.locations[winLineCloseToWinP.hits.indexOf('')];
