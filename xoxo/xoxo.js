@@ -44,10 +44,11 @@ function show (msg){ // анимация строки сообщения
 	let letters = msg.split('');
 	let liveStr = '';
 	for (let i = 0; i < letters.length; i++){
-   		setTimeout(function(){
+   		function go (){
    			liveStr += letters[i];
 			document.getElementById('messageArea').innerHTML = liveStr;
-		}, (i+1)*20);
+		}
+   		setTimeout(go, i*20);
    }
 }
 
