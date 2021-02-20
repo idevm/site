@@ -281,13 +281,30 @@ function randomLocation(){ // генератор случайной позици
 }
 
 function init(){ //инициализация игры (стартового экрана)
-		let XOstars = parseInt(localStorage.getItem('XOstars'));
-		if (!XOstars) {
-			XOstars = 0;
-			localStorage.setItem('XOstars', 0);
-		}
-		model.starScore = XOstars;
-		view.displayStarScore();
+	let XOColorMode = localStorage.getItem('XOColorMode');
+	if (!XOColorMode) {
+		XOColorMode = 'light';
+		localStorage.setItem('XOColorMode', XOColorMode);
+	}	
+	document.getElementById('colorMode').setAttribute('class', XOColorMode + 'Mode');
+	document.body.setAttribute('class', XOColorMode + 'Body');
+	document.getElementById('window').setAttribute('class', XOColorMode + 'Window');
+
+	let XOSoundMode = localStorage.getItem('XOSoundMode');
+	if (!XOSoundMode) {
+		XOSoundMode = 'sound';
+		localStorage.setItem('XOSoundMode', 'sound');
+	}
+	document.getElementById('soundMode').setAttribute('class', XOSoundMode);
+
+	let XOstars = parseInt(localStorage.getItem('XOstars'));
+	if (!XOstars) {
+		XOstars = 0;
+		localStorage.setItem('XOstars', 0);
+	}
+	model.starScore = XOstars;
+	view.displayStarScore();
+
 	setTimeout(function(){
 		document.getElementById('loadScreen').style.display = 'none';
 	}, 2500);
@@ -468,13 +485,15 @@ function continueGame(){ // начало новой партии текущей 
 function changeSound(){ // смена беззвучного режима
 	if (document.getElementById('soundMode').classList.contains('sound')){
 		document.getElementById('soundMode').setAttribute('class', 'mute');
+		localStorage.setItem('XOSoundMode', 'mute');
 		view.displayMessage('Режим: без звука');	
 		setTimeout(function(){
 			view.displayMessage(model.currentMessage);
 		}, 1500);
 	} else {
 		document.getElementById('soundMode').setAttribute('class', 'sound');
-		view.displayMessage('Режим: со звуком');	
+		view.displayMessage('Режим: со звуком');
+		localStorage.setItem('XOSoundMode', 'sound');	
 		setTimeout(function(){
 			view.displayMessage(model.currentMessage);
 		}, 1500);
@@ -486,6 +505,7 @@ function changeColorScheme(){ // смена стиля экрана (светл�
 		document.getElementById('colorMode').setAttribute('class', 'darkMode');
 		document.body.setAttribute('class', 'darkBody');
 		document.getElementById('window').setAttribute('class', 'darkWindow');
+		localStorage.setItem('XOColorMode', 'dark');
 		view.displayMessage('Тема: темная');	
 		setTimeout(function(){
 			view.displayMessage(model.currentMessage);
@@ -494,6 +514,7 @@ function changeColorScheme(){ // смена стиля экрана (светл�
 		document.getElementById('colorMode').setAttribute('class', 'lightMode');
 		document.body.setAttribute('class', 'lightBody');
 		document.getElementById('window').setAttribute('class', 'lightWindow');
+		localStorage.setItem('XOColorMode', 'light');
 		view.displayMessage('Тема: светлая');	
 		setTimeout(function(){
 			view.displayMessage(model.currentMessage);
