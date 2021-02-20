@@ -176,6 +176,7 @@ function isGameEnd (item){ // проверка окончена ли игра
 		view.displayLine(item.name);
 		if (item.locations.indexOf(model.currentStarLocation) >= 0){
 			model.starScore++;
+			localStorage.setItem('XOstars', model.starScore);
 			view.displayStarScore();
 			document.getElementById('star').src = 'winStar.png';
 			document.getElementById('star').setAttribute('class', 'winStar');	
@@ -193,6 +194,7 @@ function isGameEnd (item){ // проверка окончена ли игра
 			if (item.locations.indexOf(model.currentStarLocation) >= 0){
 				if (model.starScore > 0){
 					model.starScore--;
+					localStorage.setItem('XOstars', model.starScore);
 					view.displayStarScore();
 				}
 				document.getElementById('star').src = 'failStar.png';
@@ -279,6 +281,12 @@ function randomLocation(){ // генератор случайной позици
 }
 
 function init(){ //инициализация игры (стартового экрана)
+		let XOstars = localStorage.getItem('XOstars');
+		if (!XOstars) {
+			XOstars = 0;
+		}
+		model.starScore = XOstars;
+
 	setTimeout(function(){
 		document.getElementById('loadScreen').style.display = 'none';
 	}, 2500);
