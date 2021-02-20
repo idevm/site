@@ -40,17 +40,36 @@ var view = { //визуальное представление
 	}
 };
 
-function show (msg){ // анимация строки сообщения
+function show(msg){
 	let letters = msg.split('');
-	let liveStr = '';
-	for (let i = 0; i < letters.length; i++){
-   		function go (){
-   			liveStr += letters[i];
-			document.getElementById('messageArea').innerHTML = liveStr;
-		}
-   		setTimeout(go, i*20);
-   }
+	let liveString = '';
+	let index = 0;
+	loop();
+	function loop (){
+		setTimeout(
+			function(){
+				liveString += letters[index];
+				document.getElementById('messageArea').innerHTML = liveString; console.log(liveString);
+				index += 1;
+				if (index === letters.length){
+					return;
+				}
+				return loop();		
+			}, 20);
+	}
 }
+
+// function show (msg){ // анимация строки сообщения
+// 	let letters = msg.split('');
+// 	let liveStr = '';
+// 	for (let i = 0; i < letters.length; i++){
+//    		function go (){
+//    			liveStr += letters[i];
+// 			document.getElementById('messageArea').innerHTML = liveStr;
+// 		}
+//    		setTimeout(go, i*20);
+//    }
+// }
 
 var model = { //модель и состояние игры
 	
