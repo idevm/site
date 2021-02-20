@@ -60,7 +60,7 @@ top: 264px;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 36px;
-	line-height: 41px;
+	line-height: 141px;
 	display: block;
 	align-items: center;
 	text-align: center;
@@ -100,12 +100,12 @@ top: 264px;
 }
 
 #colorMode {
-position: absolute;
-width: 58px;
-height: 58px;
-left: calc(50% - 58px/2 + 343px);
-top: 40px;
-	z-index: 2;
+	position: absolute;
+	width: 58px;
+	height: 58px;
+	left: calc(50% - 58px/2 + 343px);
+	top: 40px;
+		z-index: 2;
 }
 
 .darkMode {
@@ -117,11 +117,11 @@ top: 40px;
 }
 
 #soundMode {
-position: absolute;
-width: 58px;
-height: 58px;
-left: calc(50% - 58px/2 - 343px);
-top: 40px;
+	position: absolute;
+	width: 58px;
+	height: 58px;
+	left: calc(50% - 58px/2 - 343px);
+	top: 40px;
 	z-index: 2;
 }
 
@@ -134,11 +134,11 @@ top: 40px;
 }
 
 #starScore {
-position: absolute;
-width: 58px;
-height: 58px;
-left: calc(50% - 58px/2 - 343px);
-top: 727px;
+	position: absolute;
+	width: 58px;
+	height: 58px;
+	left: calc(50% - 58px/2 - 343px);
+	top: 727px;
 	z-index: 2;
 	text-align: center;
 	line-height: 58px;
@@ -172,118 +172,101 @@ top: 727px;
 }
 
 #difWindow {
-position: absolute;
-display: none;
-width: 571px;
-height: 405px;
-left: calc(50% - 571px/2 + 86.5px);
-top: 310px;
-background: rgba(133, 200, 221, 0.5);
-border: 1px solid #1371C8;
-box-sizing: border-box;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-backdrop-filter: blur(20px);
-border-radius: 10px;
-z-index: 3;
+	position: absolute;
+	display: none;
+	width: 571px;
+	height: 405px;
+	left: calc(50% - 571px/2 + 86.5px);
+	top: 310px;
+	background: rgba(133, 200, 221, 0.7);
+	border: 1px solid #1371C8;
+	box-sizing: border-box;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	backdrop-filter: blur(20px);
+	border-radius: 10px;
+	z-index: 3;
 }
 
-#chooseDifHeader {
-position: absolute;
-width: 571px;
-height: 36px;
-left: calc(50% - 571px/2);
-top: 37px;
-font-family: Arial;
-font-style: normal;
-font-weight: normal;
-font-size: 36px;
-line-height: 42px;
-display: block;
-align-items: center;
-text-align: center;
-color: #FFFFFF;
+#difWindowHeader {
+	position: absolute;
+	width: 571px;
+	height: 36px;
+	left: calc(50% - 571px/2);
+	top: 37px;
+	font-family: Arial;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 36px;
+	line-height: 42px;
+	display: block;
+	align-items: center;
+	text-align: center;
+	color: black;
 }
 
 #difWindowText {
-position: absolute;
-width: 571px;
-height: 28px;
-left: calc(50% - 571px/2);
-top: 92px;
-font-family: Arial;
-font-style: normal;
-font-weight: normal;
-font-size: 28px;
-line-height: 33px;
-display: block;
-align-items: center;
-text-align: center;
-color: #FFFFFF;
+	position: absolute;
+	width: 571px;
+	height: 28px;
+	left: calc(50% - 571px/2);
+	top: 92px;
+	font-family: Arial;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 28px;
+	line-height: 33px;
+	display: block;
+	align-items: center;
+	text-align: center;
+	color: black;
 }
 
 #easyButton {
-position: absolute;
-width: 453px;
-height: 78px;
-left: calc(50% - 453px/2);
-top: 188px;
-border-radius: 10px;
-}
-
-#easyText {
 	position: absolute;
-width: 450px;
-height: 78px;
-left: calc(50% - 450px/2);
-top: 0px;
-font-family: Arial;
-font-style: normal;
-font-weight: normal;
-font-size: 36px;
-line-height: 78px;
-display: block;
-align-items: center;
-text-align: center;
-color: #FFFFFF;
+	width: 453px;
+	height: 78px;
+	left: calc(50% - 453px/2);
+	top: 188px;
+	border-radius: 10px;
+	font-family: Arial;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 36px;
+	line-height: 78px;
+	display: block;
+	align-items: center;
+	text-align: center;
+	color: #FFFFFF;
 }
 
 .unselEasyBut {
-background: url(easyButtonUnselected.png) no-repeat center center;
+	background: url(easyButtonUnselected.png) no-repeat center center;
 }
 
 .selEasyBut {
-background: url(easyButtonSelected.png) no-repeat center center;
+	background: url(easyButtonSelected.png) no-repeat center center;
 }
 
 #normalButton {
-position: absolute;
-width: 453px;
-height: 78px;
-left: calc(50% - 453px/2 + 1px);
-top: 290px;
-border-radius: 10px;
-}
-
-#normText {
 	position: absolute;
-width: 453px;
-height: 78px;
-left: calc(50% - 453px/2 - 1px);
-top: 2px;
-font-family: Arial;
-font-style: normal;
-font-weight: normal;
-font-size: 36px;
-line-height: 78px;
-display: block;
-align-items: center;
-text-align: center;
-color: #FFFFFF;
-
+	width: 453px;
+	height: 78px;
+	left: calc(50% - 453px/2 + 1px);
+	top: 290px;
+	border-radius: 10px;
+	font-family: Arial;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 36px;
+	line-height: 78px;
+	display: block;
+	align-items: center;
+	text-align: center;
+	color: #FFFFFF;
 }
 
 .unselNormBut {
-background: url(normalButtonUnselected.png) no-repeat center center;
+	background: url(normalButtonUnselected.png) no-repeat center center;
 }
 
 .selNormBut {

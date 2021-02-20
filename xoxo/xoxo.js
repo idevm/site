@@ -40,7 +40,7 @@ var view = { //визуальное представление
 	}
 };
 
-function show(msg){
+function show(msg){ // анимация строки сообщения
 	let letters = msg.split('');
 	let liveString = '';
 	let index = 0;
@@ -49,27 +49,15 @@ function show(msg){
 		setTimeout(
 			function(){
 				liveString += letters[index];
-				document.getElementById('messageArea').innerHTML = liveString; console.log(liveString);
+				document.getElementById('messageArea').innerHTML = liveString;
 				index += 1;
 				if (index === letters.length){
 					return;
 				}
 				return loop();		
-			}, 20);
+			}, 15);
 	}
 }
-
-// function show (msg){ // анимация строки сообщения
-// 	let letters = msg.split('');
-// 	let liveStr = '';
-// 	for (let i = 0; i < letters.length; i++){
-//    		function go (){
-//    			liveStr += letters[i];
-// 			document.getElementById('messageArea').innerHTML = liveStr;
-// 		}
-//    		setTimeout(go, i*20);
-//    }
-// }
 
 var model = { //модель и состояние игры
 	
@@ -99,7 +87,7 @@ var model = { //модель и состояние игры
 
 	freeCells: [], // свободные ячейки, в которые можно делать ход
 	
-	difficult: 1, // сложность (0 - легкая, 1 - нормальная)
+	difficult: 2, // сложность (0 - легкая, 1 - нормальная)
 
 	cells: [	
 		{name: 'row0', locations: ['00', '01', '02'], hits: ['', '', '',], toWinP: 0}, 
@@ -519,7 +507,7 @@ if (document.getElementById('difMode').classList.contains('normal')){
 		document.getElementById('easyButton').setAttribute('class', 'selEasyBut');
 		document.getElementById('normalButton').setAttribute('class', 'unselNormBut');						
 		model.difficult = 0;
-		view.displayMessage('Сложность: легкая');
+		view.displayMessage('Сложность: легко');
 		setTimeout(function(){
 			view.displayMessage(model.currentMessage);
 		}, 1500);
