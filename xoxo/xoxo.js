@@ -281,12 +281,13 @@ function randomLocation(){ // генератор случайной позици
 }
 
 function init(){ //инициализация игры (стартового экрана)
-		let XOstars = localStorage.getItem('XOstars');
+		let XOstars = parseInt(localStorage.getItem('XOstars'));
 		if (!XOstars) {
 			XOstars = 0;
+			localStorage.setItem('XOstars', 0);
 		}
 		model.starScore = XOstars;
-
+		view.displayStarScore();
 	setTimeout(function(){
 		document.getElementById('loadScreen').style.display = 'none';
 	}, 2500);
